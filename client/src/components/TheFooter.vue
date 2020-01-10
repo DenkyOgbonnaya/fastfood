@@ -57,7 +57,7 @@
 @import "@/assets/scss/index.scss";
 
 footer {
-  background: #272727;
+  background: $dark-color;
   color: $light-color;
   padding: 10px;
   margin-top: map-get($margins, top);
