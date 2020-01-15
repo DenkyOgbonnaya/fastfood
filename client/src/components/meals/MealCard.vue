@@ -40,6 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/index.scss';
 .meal-card {
   max-width: 100%;
   border: 1px solid #ccc;
@@ -47,7 +48,6 @@ export default {
   figure img {
     max-width: 100%;
     height: 40%;
-    opacity: 0.9;
   }
   .meal-details {
     display: flex;
@@ -72,6 +72,9 @@ export default {
   .btn {
     width: 100%;
     border-radius: 20px;
+  }
+  @include desktop(){
+    max-width: 90%;
   }
 }
 .meal-name {
