@@ -7,6 +7,7 @@ import Meals from '../views/Meals.vue'
 import MealDetails from '../views/MealDetails.vue'
 import Checkout from '../views/Checkout.vue'
 import OrderBill from '../views/OrderBill.vue'
+import Partnership from '../views/Partnership'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/order-bill',
     name: 'OrderBill',
     component: OrderBill
+  },
+  {
+    path: '/partner-us',
+    name: 'Partnership',
+    component: Partnership
   }
 ]
 
