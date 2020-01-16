@@ -6,6 +6,7 @@ import RestaurantDetails from '../views/RestaurantDetails'
 import Meals from '../views/Meals.vue'
 import MealDetails from '../views/MealDetails.vue'
 import Checkout from '../views/Checkout.vue'
+import OrderBill from '../views/OrderBill.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: Checkout
+  },
+  {
+    path: '/order-bill',
+    name: 'OrderBill',
+    component: OrderBill
   }
 ]
 
