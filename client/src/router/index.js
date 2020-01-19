@@ -9,6 +9,7 @@ import Checkout from '../views/Checkout.vue'
 import OrderBill from '../views/OrderBill.vue'
 import Partnership from '../views/Partnership'
 import AddRestaurant from '../views/AddRestaurant'
+import AddDriver from '../views/AddDriver'
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,11 @@ const routes = [
     path: '/partner-us',
     name: 'Partnership',
     component: Partnership
+  },
+  {
+    path: '/add-driver',
+    name: 'AddDriver',
+    component: AddDriver
   }
 ]
 
