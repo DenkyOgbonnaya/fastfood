@@ -12,6 +12,7 @@ import AddRestaurant from '../views/AddRestaurant'
 import AddDriver from '../views/AddDriver'
 import UserProfile from '../views/UserProfile'
 import ProfileAbout from '@/components/profile/ProfileAbout'
+import OrderHistory from '../views/OrderHistory'
 
 Vue.use(VueRouter)
 
@@ -71,7 +72,8 @@ const routes = [
     name: 'UserProfile',
     component: UserProfile,
     children: [
-      { path: '/about', component: ProfileAbout, name: 'profileAbout' }
+      { path: '/about', component: ProfileAbout, name: 'profileAbout' },
+      { path: '/order-history', component: OrderHistory, name: 'orderHistory' }
     ]
   }
 ]

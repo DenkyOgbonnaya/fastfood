@@ -14,10 +14,12 @@
       >
         <ul class="list-group">
           <li class="list-group-item">
-            <router-link :to="{name: 'About'}">About</router-link>
+            <router-link :to="{name: 'profileAbout'}">About</router-link>
           </li>
           <li class="list-group-item">Notification</li>
-          <li class="list-group-item">Order History</li>
+          <li class="list-group-item">
+            <router-link :to="{name: 'orderHistory'}">Order History</router-link>
+          </li>
           <li class="list-group-item">Meals</li>
           <li class="list-group-item">Restaurant Changes</li>
         </ul>
