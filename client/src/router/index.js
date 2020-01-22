@@ -10,6 +10,8 @@ import OrderBill from '../views/OrderBill.vue'
 import Partnership from '../views/Partnership'
 import AddRestaurant from '../views/AddRestaurant'
 import AddDriver from '../views/AddDriver'
+import UserProfile from '../views/UserProfile'
+import ProfileAbout from '@/components/profile/ProfileAbout'
 
 Vue.use(VueRouter)
 
@@ -63,6 +65,14 @@ const routes = [
     path: '/add-driver',
     name: 'AddDriver',
     component: AddDriver
+  },
+  {
+    path: '/user-profile',
+    name: 'UserProfile',
+    component: UserProfile,
+    children: [
+      { path: '/about', component: ProfileAbout, name: 'profileAbout' }
+    ]
   }
 ]
 
