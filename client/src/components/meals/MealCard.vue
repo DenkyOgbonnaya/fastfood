@@ -45,6 +45,9 @@ export default {
   max-width: 100%;
   border: 1px solid #ccc;
   margin-bottom: 10px;
+  @include desktop(){
+    max-width: 350px;
+  }
   figure img {
     max-width: 100%;
     height: 40%;

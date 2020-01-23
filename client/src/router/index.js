@@ -13,6 +13,7 @@ import AddDriver from '../views/AddDriver'
 import UserProfile from '../views/UserProfile'
 import ProfileAbout from '@/components/profile/ProfileAbout'
 import OrderHistory from '../views/OrderHistory'
+import RestaurantMeals from '../views/RestaurantMeals'
 
 Vue.use(VueRouter)
 
@@ -73,7 +74,8 @@ const routes = [
     component: UserProfile,
     children: [
       { path: '/about', component: ProfileAbout, name: 'profileAbout' },
-      { path: '/order-history', component: OrderHistory, name: 'orderHistory' }
+      { path: '/order-history', component: OrderHistory, name: 'orderHistory' },
+      { path: '/restaurant-meals', component: RestaurantMeals, name: 'restaurantMeals' }
     ]
   }
 ]

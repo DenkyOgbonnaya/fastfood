@@ -20,7 +20,9 @@
           <li class="list-group-item">
             <router-link :to="{name: 'orderHistory'}">Order History</router-link>
           </li>
-          <li class="list-group-item">Meals</li>
+          <li class="list-group-item">
+            <router-link :to="{name: 'restaurantMeals'}">Meals</router-link>
+          </li>
           <li class="list-group-item">Restaurant Changes</li>
         </ul>
       </div>

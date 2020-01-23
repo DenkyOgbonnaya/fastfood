@@ -7,7 +7,7 @@
       <div
         v-for="meal in meals"
         :key="meal._id"
-        class="col-sm-12 col-md-4"
+        class="col-sm-6 col-md-4"
       >
         <MealCard :meal="meal"/>
       </div>
