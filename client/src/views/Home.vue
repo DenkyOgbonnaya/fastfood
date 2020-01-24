@@ -27,7 +27,15 @@
     </section>
     <OrderFlow />
     <h4>Order Food Online From Your Favourite Restuarants</h4>
-    <RestaurantList :restaurants="restaurants" />
+    <section class="restaurant-list">
+      <div class="meal-filter-desk">
+        <RestaurantFilter :isExpanded="true"/>
+      </div>
+      <div class="meal-filter-mobi">
+        <RestaurantFilter :isExpanded="false"/>
+      </div>
+      <RestaurantList :restaurants="restaurants" />
+    </section>
     <div class="offer_container">
         <div class="offer_card">
             <h3 class="card-title">Get Breakfast and Lunch deals</h3>
@@ -51,6 +59,7 @@
 <script>
 import OrderFlow from '@/components/OrderFlow'
 import RestaurantList from '@/components/restaurants/RestaurantList'
+import RestaurantFilter from '@/components/restaurants/RestaurantFilter'
 import SubscriptionDeals from '@/components/SubscriptionDeals'
 export default {
   name: 'home',
@@ -65,6 +74,7 @@ export default {
   components: {
     OrderFlow,
     RestaurantList,
+    RestaurantFilter,
     SubscriptionDeals
   }
 }
@@ -74,7 +84,7 @@ export default {
 @import '@/assets/scss/index.scss';
 
   .home-view-container {
-  section {
+  section:first-child {
     color: $light-color;
     background-image: url("~@/assets/images/home-banner.jpg");
     background-size: cover;
@@ -90,11 +100,33 @@ export default {
       margin-top: map-get($margins, top);
       margin-bottom: map-get($margins, bottom);
       font-weight: map-get($font-weights, bold);
+      text-align: center;
     @include desktop() {
       margin-top: map-get($margins-desktop, top);
       margin-bottom: map-get($margins-desktop, bottom);
     }
   };
+  .restaurant-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    & .meal-filter-desk {
+      display: none;
+    };
+    & .meal-filter-mobi {
+      display: block;
+    }
+    @include desktop() {
+      flex-direction: row;
+      padding: 2% 5%;
+      .meal-filter-desk {
+        display: block;
+      }
+      .meal-filter-mobi {
+        display: none;
+      }
+    }
+  }
   .offer_container{
     margin-top: map-get($margins, top);
     & div:first-child {
@@ -119,7 +151,7 @@ export default {
     }
   }
   @include desktop() {
-    & section {
+    & section:first-child {
       display: flex;
       justify-content: space-around;
       &>div {

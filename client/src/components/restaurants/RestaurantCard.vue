@@ -4,11 +4,17 @@
       <h5>Jamals Shawama</h5>
     </div>
     <div class="card_footer">
-      <div>
+      <div class="restaurant-city">
         <span> Garki</span>
-        <span> From N300</span>
+        <button class="btn btn-outline-danger btn-sm">Menu</button>
       </div>
-      <div class="text-muted">Delivery Time: 50 min </div>
+      <div class="text-muted">
+        <font-awesome-icon
+          icon="shopping-cart"
+          class="f-awesome"
+        />
+        Delivery Time: 50 min
+      </div>
     </div>
   </div>
 </template>
@@ -25,11 +31,10 @@ export default {
 <style lang="css" scoped>
   .card-container {
       border: 1px solid #ccc;
-      width: 100%;
       margin-bottom: 15px;
   }
   .card_body {
-    height: 300px;
+    height: 200px;
     background-image: url("~@/assets/images/home-banner.jpg");
     background-size: cover;
     display: flex;
@@ -42,17 +47,19 @@ export default {
     height: 100px;
     padding: 20px;
   }
-  .card_footer>div {
+  .card_footer .restaurant-city{
     display: flex;
     justify-content: space-between;
   }
-  .card_footer>div span:first-child {
+  .card_footer
+  .restaurant-city span:first-child {
     font-weight: bold;
   }
-  .card_footer>div span:last-child {
-    color: red;
-  }
   .card_footer div:last-child {
-    margin-top: 20px;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .f-awesome {
+    color: grey;
   }
 </style>

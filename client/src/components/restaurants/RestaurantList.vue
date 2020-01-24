@@ -4,18 +4,20 @@
           class="row"
         >
             <div
-              class="col-sm-12 col-md-3"
+              class="col-sm-12 col-md-6 col-lg-3"
               v-for="restaurant in restaurants"
               :key="restaurant._id"
             >
               <RestaurantCard :restaurant="restaurant"/>
             </div>
         </div>
+        <AppPagination />
     </div>
 </template>
 
 <script>
 import RestaurantCard from './RestaurantCard'
+import AppPagination from '../AppPagination'
 export default {
   name: 'RestaurantList',
   data () {
@@ -29,7 +31,8 @@ export default {
     }
   },
   components: {
-    RestaurantCard
+    RestaurantCard,
+    AppPagination
   },
   props: {
     restaurantss: Array
