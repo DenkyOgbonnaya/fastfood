@@ -14,6 +14,7 @@ import UserProfile from '../views/UserProfile'
 import ProfileAbout from '@/components/profile/ProfileAbout'
 import OrderHistory from '../views/OrderHistory'
 import RestaurantMeals from '../views/RestaurantMeals'
+import Restaurant from '../views/Restaurant'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/how-to-order',
     name: 'howToOrder',
     component: HowToOrder
+  },
+  {
+    path: '/restaurant',
+    name: 'restaurant',
+    component: Restaurant
   },
   {
     path: '/restaurant-details',
