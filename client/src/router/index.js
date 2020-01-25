@@ -15,6 +15,7 @@ import ProfileAbout from '@/components/profile/ProfileAbout'
 import OrderHistory from '../views/OrderHistory'
 import RestaurantMeals from '../views/RestaurantMeals'
 import Restaurant from '../views/Restaurant'
+import OrderDetails from '../views/OrderDetails'
 
 Vue.use(VueRouter)
 
@@ -73,6 +74,11 @@ const routes = [
     path: '/add-driver',
     name: 'AddDriver',
     component: AddDriver
+  },
+  {
+    path: '/order-details',
+    name: 'orderDetails',
+    component: OrderDetails
   },
   {
     path: '/user-profile',
