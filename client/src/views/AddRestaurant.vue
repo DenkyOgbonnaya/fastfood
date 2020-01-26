@@ -13,15 +13,18 @@
     <main>
       <section>
         <h4>Add Restaurant</h4>
-        <section class="basic-info">
-          <h5>Basic Info</h5>
-          <form>
+        <form
+          @submit.prevent="addRestaurant"
+          class="basic-info">
+          <div class="form-group">
+            <h5>Basic Info</h5>
             <label for="name">Restaurant name*</label>
             <input
               type="text"
               name="name"
               placeholder="Enter restaurant name"
               class="form-control"
+              required
             />
             <label for="city">City*</label>
             <input
@@ -29,6 +32,7 @@
               name="city"
               placeholder="Enter city"
               class="form-control"
+              required
             />
             <label for="owner">Owner or manager*?</label>
             <ul>
@@ -41,17 +45,24 @@
                 <label for="manager">Manager</label>
               </li>
             </ul>
-          </form>
-        </section>
-        <section class="contact-info">
-          <h5>Contact Info*</h5>
-          <form>
+          </div>
+          <div class="form-group">
+            <h5>Contact Info*</h5>
+            <label for="address">Address*</label>
+            <input
+              type="text"
+              name="address"
+              placeholder="Enter the address"
+              class="form-control"
+              required
+            />
             <label for="email">Email address*</label>
             <input
               type="email"
               name="email"
               placeholder="Eestaurant Email Address"
               class="form-control"
+              required
             />
             <label for="phone">Phone Number*</label>
             <input
@@ -59,8 +70,9 @@
               name="phone"
               placeholder="owner/manger phone"
               class="form-control"
+              required
             />
-            <label for="restPhone">Restaurant Phone Number*</label>
+            <label for="restPhone">Restaurant Phone Number</label>
             <input
               type="text"
               name="restPhone"
@@ -74,58 +86,67 @@
               placeholder="Restaurant website"
               class="form-control"
             />
-            <label for="status">Open Status*</label>
-            <ul>
-              <li>
-                <input type="radio" name="status" id="opened" />
-                <label for="opend">Opened</label>
-              </li>
-              <li>
-                <input type="radio" name="status" id="soon" />
-                <label for="soon">Opening soon</label>
-              </li>
-            </ul>
-          </form>
-        </section>
-        <section class="timings">
-          <OpeningTime />
-        </section>
-        <section class="location">
-          <h5>Location*</h5>
-          <label for="address"></label>
-          <input
-            type="text"
-            name="address"
-            placeholder="Enter the address"
-            class="form-control"
-          />
-        </section>
-        <section class="services">
-          <h5>Services*</h5>
-          what meals do you offer?
-          <ul>
-            <li><input type="checkbox" />Breakfast</li>
-            <li><input type="checkbox" />Lunch</li>
-            <li><input type="checkbox" />Dinner</li>
-          </ul>
-          <button class="btn btn-warning">Add Restaurant</button>
-        </section>
+          </div>
+          <div class="form-group">
+            <h5>Timings*</h5>
+            <label for="daysOpen">Opening days*</label>
+            <input
+              type="text"
+              name="daysOpen"
+              placeholder="eg Mon-Sun"
+              class="form-control"
+              required
+            />
+            <label for="hoursOpen">Opening hours*</label>
+            <input
+              type="text"
+              name="hoursOpen"
+              placeholder="eg 6am-12pm"
+              class="form-control"
+              required
+            />
+          </div>
+          <button class="btn btn-warning text-ligth">Next</button>
+        </form>
       </section>
       <section>
-        <HowToPartner/>
+        <HowToPartner />
       </section>
     </main>
+    <AppModal
+      v-if="isAddMenuModalVisible"
+      @close="closeAddMenuModal"
+    >
+      <template v-slot:body>
+        <AddMenu/>
+      </template>
+    </AppModal>
   </div>
 </template>
 
 <script>
-import OpeningTime from '@/components/OpeningTime'
 import HowToPartner from '@/components/HowToPartner'
+import AddMenu from '@/components/restaurants/AddMenu'
+import AppModal from '@/components/AppModal'
 export default {
   name: 'AddRestauarant',
+  data () {
+    return {
+      isAddMenuModalVisible: false
+    }
+  },
   components: {
-    OpeningTime,
-    HowToPartner
+    HowToPartner,
+    AddMenu,
+    AppModal
+  },
+  methods: {
+    addRestaurant () {
+      this.isAddMenuModalVisible = true
+    },
+    closeAddMenuModal () {
+      // do nothing
+    }
   }
 }
 </script>
@@ -150,6 +171,7 @@ main {
     }
   }
   section:first-child {
+    margin-bottom: 3%;
     h4 {
       font-weight: bold;
     }
