@@ -106,6 +106,14 @@
               required
             />
           </div>
+          <div class="form-group">
+            <label for="coverPhoto">Add a cover photo</label>
+            <input
+              type="file"
+              name="coverPhoto"
+              class="form-control"
+            />
+          </div>
           <button class="btn btn-warning text-ligth">Next</button>
         </form>
       </section>

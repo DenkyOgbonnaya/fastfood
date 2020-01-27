@@ -17,6 +17,14 @@
           required
         />
       </div>
+      <div class="form-group">
+        <label for="cover">Add a cover photo</label>
+        <input
+          type="file"
+          name="cover"
+          class="form-control"
+        />
+      </div>
       <button class="btn btn-warning">Add</button>
     </form>
       <ul v-if="categories.length">
@@ -24,7 +32,7 @@
           v-for="(category, index) in categories"
           :key="index"
         >
-          <span class="badge badge-primary">{{category}}</span>
+          <span class="badge badge-primary">{{category.name}}</span>
           <span @click="removeCategory(index)">x</span>
         </li>
     </ul>
@@ -38,12 +46,17 @@ export default {
   data () {
     return {
       categories: [],
-      name: ''
+      name: '',
+      coverPhoto: ''
     }
   },
   methods: {
     addCategory () {
-      this.categories.push(this.name)
+      let category = {
+        name: this.name,
+        coverPhoto: this.coverPhoto
+      }
+      this.categories.push(category)
     },
     removeCategory (index) {
       this.categories = this.categories.filter((category, catIndex) => catIndex !== index)
