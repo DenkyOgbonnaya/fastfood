@@ -3,6 +3,7 @@ const restaurantType = require("./graphql-types/restaurant-type");
 const menuType = require("./graphql-types/menu-type");
 const mealType = require("./graphql-types/meal-type");
 const userType = require("./graphql-types/user-type");
+const { createUser, loginUser } = require("../user").userController();
 
 const {
   GraphQLObjectType,
@@ -22,7 +23,14 @@ const Mutation = new GraphQLObjectType({
         email: { type: GraphQLString },
         password: { type: GraphQLString }
       },
-      resolve(parent, args) {}
+      resolve: async (parent, args) => {
+        try {
+          const token = await createUser(args);
+          return {token};
+        } catch (err) {
+          throw err;
+        }
+      }
     },
     login: {
       type: userType,
@@ -30,7 +38,14 @@ const Mutation = new GraphQLObjectType({
         email: { type: GraphQLString },
         password: { type: GraphQLString }
       },
-      resolve(parent, args) {}
+      resolve: async (parent, args, context) => {
+        try {
+          const token = await loginUser(args);
+          return {token}
+        } catch (err) {
+          throw err;
+        }
+      }
     },
     addRestaurant: {
       type: restaurantType,

@@ -11,9 +11,9 @@ const{
 
 module.exports = {
   development: {
-    username: DB_USER,
-    database: DB_NAME,
-    password: DB_PASS,
+    username: 'postgres',//DB_USER,
+    database: 'fastfood',//DB_NAME,
+    password: 'denky', //DB_PASS
     port: DB_PORT,
     host: DB_HOST,
     dialect: 'postgres'

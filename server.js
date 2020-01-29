@@ -12,10 +12,14 @@ app.use(express.json());
 app.use(cors({ credentials: true }));
 
 // Graphql api endpoint
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql', graphqlHTTP( (request, response, graphQLParams) => ({
   schema,
-  graphiql: true
-}))
+  graphiql: true,
+  context: { 
+    request: request, 
+    test: 'context value'
+  }
+})))
 
 app.listen(PORT, err => {
   if (!err) console.log(`Server running on port ${PORT}`);

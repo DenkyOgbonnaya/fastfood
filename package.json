@@ -9,11 +9,16 @@
     "pretest": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
+    "bcrypt": "^3.0.7",
+    "cloudinary": "^1.19.0",
     "cors": "^2.8.5",
+    "datauri": "^2.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
     "pg": "^7.17.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.3"
