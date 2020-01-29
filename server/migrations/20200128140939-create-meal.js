@@ -18,7 +18,11 @@ module.exports = {
       },
       menuId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: "Menus",
+          key: "id"
+        }
       },
       extras: {
         type: Sequelize.ARRAY(Sequelize.JSON)

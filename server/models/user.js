@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
+  const User = sequelize.define('User', {
     fullname: {
       type: DataTypes.STRING,
       allowNull: false
@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
       as: 'restaurants',
       onDelete: 'CASCADE',
     });
+    User.hasOne(models.Driver, {
+      foreignKey: 'ownerId',
+      as: 'driver'
+    })
   };
   return User;
 };

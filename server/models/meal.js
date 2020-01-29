@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Meal = sequelize.define('Meal', {
     name: {
-      type: DataTypes.String,
+      type: DataTypes.STRING,
       allowNull: false
     },
     price: {
@@ -10,15 +10,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     menuId: {
-      type: DataTypes.String,
+      type: DataTypes.STRING,
       allowNull: false
-    },
-    extras: {
-      type: DataTypes.ARRAY(DataTypes.JSON)
     }
   }, {});
   Meal.associate = function(models) {
     // associations can be defined here
+    Meal.hasMany(models.Extra, {
+      foreignKey: 'mealId',
+      as: 'extras',
+      onDelete: 'CASCADE',
+    })
     Meal.belongsTo(models.Menu, {
       foreignKey: 'menuId',
       as: 'menu',

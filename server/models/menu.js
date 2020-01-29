@@ -1,27 +1,32 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Menu = sequelize.define('Menu', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
+  const Menu = sequelize.define(
+    "Menu",
+    {
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      restaurantId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      photo: DataTypes.STRING
     },
-    restaurantId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    photo: DataTypes.STRING
-  }, {});
+    {}
+  );
   Menu.associate = function(models) {
     // associations can be defined here
     Menu.hasMany(models.Meal, {
-      foreignKey: 'menuId',
-      as: 'meals',
-      onDelete: 'CASCADE',
+      foreignKey: "menuId",
+      as: "meals",
+      onDelete: "CASCADE"
     });
     Menu.belongsTo(models.Restaurant, {
-      foreignKey: 'restaurantId',
-      onDelete: 'CASCADE',
-    })
+      foreignKey: "restaurantId",
+      as: "restaurant",
+      onDelete: "CASCADE"
+    });
   };
   return Menu;
 };
