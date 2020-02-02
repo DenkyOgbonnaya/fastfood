@@ -1,26 +1,19 @@
 "use strict";
-
 const express = require("express");
 const cors = require("cors");
-const graphqlHTTP = require('express-graphql');
-const schema = require('./server/graphql/graphql-schema')
+const { ApolloServer } = require("apollo-server-express");
+const schemas = require("./server/graphql/schemas");
+const resolvers = require("./server/graphql/resolvers");
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
+app.use(cors());
 
-app.use(express.json());
-app.use(cors({ credentials: true }));
-
-// Graphql api endpoint
-app.use('/graphql', graphqlHTTP( (request, response, graphQLParams) => ({
-  schema,
-  graphiql: true,
-  context: { 
-    request: request, 
-    test: 'context value'
-  }
-})))
-
-app.listen(PORT, err => {
-  if (!err) console.log(`Server running on port ${PORT}`);
+const server = new ApolloServer({
+  typeDefs: schemas,
+  resolvers
+});
+server.applyMiddleware({ app, path: "/graphql" });
+app.listen({ port }, () => {
+  console.log(`Server on http://localhost:${port}/graphql`);
 });
