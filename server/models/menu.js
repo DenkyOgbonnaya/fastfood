@@ -5,13 +5,24 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
       },
       restaurantId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notEmpty: true
+        }
       },
-      photo: DataTypes.STRING
+      photo: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: true
+        }
+      }
     },
     {}
   );
