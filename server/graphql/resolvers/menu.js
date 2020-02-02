@@ -1,3 +1,5 @@
+const { combineResolvers } = require("graphql-resolvers");
+const { isAuthenticated } = require("./authorization");
 const {
   addMenu,
   getMenu,
@@ -20,7 +22,7 @@ const menuResolver = {
     }
   },
   Mutation: {
-    addMenu: async (parent, args) => {
+    addMenu: combineResolvers(isAuthenticated, async (parent, args) => {
       try {
         // gets the cover photo url
         const photo = await uploadPhoto(args.photo, uploader);
@@ -31,22 +33,22 @@ const menuResolver = {
       } catch (err) {
         throw err;
       }
-    },
-    editMenu: async (parent, args) => {
+    }),
+    editMenu: combineResolvers(isAuthenticated, async (parent, args) => {
       try {
         return await editMenu(args.id, args);
       } catch (err) {
         throw err;
       }
-    },
-    deleteMenu: async (parent, { id }) => {
+    }),
+    deleteMenu: combineResolvers(isAuthenticated, async (parent, { id }) => {
       try {
         const deleted = await deleteMenu(id);
         return deleted ? true : false;
       } catch (err) {
         throw err;
       }
-    }
+    })
   },
   Menu: {
     meals: async ({ id }) => {

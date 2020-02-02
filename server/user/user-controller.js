@@ -1,4 +1,4 @@
-const { sign, verify } = require("jsonwebtoken");
+const { sign } = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const {
   AuthenticationError,
@@ -9,7 +9,7 @@ require("dotenv").config();
 const { signup, emailExist } = require("./user-service")();
 
 const userController = () => {
-  const { secreteKey } = process.env;
+  const { SECRET_KEY } = process.env;
 
   // create a new user
   const createUser = async ({ fullname, email, password }) => {
@@ -26,7 +26,7 @@ const userController = () => {
         password: hashedPassword
       });
       // return user token
-      return generateJwt(newUser, secreteKey, "24h");
+      return generateJwt(newUser, SECRET_KEY, "24h");
     } catch (err) {
       throw err;
     }
@@ -48,16 +48,10 @@ const userController = () => {
           "Incorrect email and password combination"
         );
       // return a auth token
-      return generateJwt(user, secreteKey, "24h");
+      return generateJwt(user, SECRET_KEY, "24h");
     } catch (err) {
       throw err;
     }
-  };
-  const isValidToken = token => {
-    verify(token, secreteKey, err => {
-      if (err) return false;
-      return true;
-    });
   };
   // returns a jwt
   function generateJwt(user, key, expiresIn) {
@@ -79,8 +73,7 @@ const userController = () => {
   return {
     createUser,
     loginUser,
-    emailExist,
-    isValidToken
+    emailExist
   };
 };
 

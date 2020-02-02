@@ -1,3 +1,5 @@
+const { combineResolvers } = require("graphql-resolvers");
+const { isAuthenticated, isRestaurantOwner } = require("./authorization");
 const {
   getSingle,
   getAll,
@@ -29,33 +31,44 @@ const restaurantResolver = {
     }
   },
   Mutation: {
-    registerRestaurant: async (parent, args) => {
-      try {
-        // gets the cover photo url
-        const coverPhoto = await uploadPhoto(args.coverPhoto, uploader);
-        const newRestaurant = { ...args, coverPhoto };
+    registerRestaurant: combineResolvers(
+      isAuthenticated,
+      async (parent, args) => {
+        try {
+          // gets the cover photo url
+          const coverPhoto = await uploadPhoto(args.coverPhoto, uploader);
+          const newRestaurant = { ...args, coverPhoto };
 
-        // add the new restaurant to db
-        return await add(newRestaurant);
-      } catch (err) {
-        throw err;
+          // add the new restaurant to db
+          return await add(newRestaurant);
+        } catch (err) {
+          throw err;
+        }
       }
-    },
-    editRestaurant: async (parent, args) => {
-      try {
-        return await editOne(args.id, args);
-      } catch (err) {
-        throw err;
+    ),
+    editRestaurant: combineResolvers(
+      isAuthenticated,
+      isRestaurantOwner,
+      async (parent, args) => {
+        try {
+          return await editOne(args.id, args);
+        } catch (err) {
+          throw err;
+        }
       }
-    },
-    deleteRestaurant: async (parent, { id }) => {
-      try {
-        const deleted = await deleteOne(id);
-        return deleted ? true : false;
-      } catch (err) {
-        throw err;
+    ),
+    deleteRestaurant: combineResolvers(
+      isAuthenticated,
+      isRestaurantOwner,
+      async (parent, { id }) => {
+        try {
+          const deleted = await deleteOne(id);
+          return deleted ? true : false;
+        } catch (err) {
+          throw err;
+        }
       }
-    }
+    )
   },
   Restaurant: {
     menu: async ({ id }) => {

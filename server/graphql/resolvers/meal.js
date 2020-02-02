@@ -1,3 +1,5 @@
+const { combineResolvers } = require("graphql-resolvers");
+const { isAuthenticated } = require("./authorization");
 const {
   addMeal,
   deleteMeal,
@@ -7,29 +9,29 @@ const { getMealExtra } = require("../../mealExtra/mealExtra-service")();
 
 const mealResolver = {
   Mutation: {
-    addMeal: async (parent, args) => {
+    addMeal: combineResolvers(isAuthenticated, async (parent, args) => {
       try {
         // add the meal to db
         return await addMeal(args);
       } catch (err) {
         throw err;
       }
-    },
-    editMeal: async (parent, args) => {
+    }),
+    editMeal: combineResolvers(isAuthenticated, async (parent, args) => {
       try {
         return await editMeal(args.id, args);
       } catch (err) {
         throw err;
       }
-    },
-    deleteMeal: async (parent, { id }) => {
+    }),
+    deleteMeal: combineResolvers(isAuthenticated, async (parent, { id }) => {
       try {
         const deleted = await deleteMeal(id);
         return deleted ? true : false;
       } catch (err) {
         throw err;
       }
-    }
+    })
   },
   Meal: {
     extras: async ({ id }) => {
