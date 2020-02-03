@@ -1,41 +1,65 @@
 <template>
-  <div class="header-container">
-    <b-navbar toggleable="lg" type="light" variant="faded">
-      <b-navbar-brand href="#" class="navbar-brand">
-        <span>Fast</span><span>Food</span></b-navbar-brand
-      >
+  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <span class="navbar-brand">
+      <span>Fast</span>
+      <span>Food</span>
+    </span>
+    <button
+      class="navbar-toggler"
+      @click="toggleNav"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav align="center">
-          <b-nav-item href="/">Home</b-nav-item>
-          <b-nav-item href="/how-to-order">How to order</b-nav-item>
-        </b-navbar-nav>
-
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <b-nav-item href="#"
-            ><span class="account-nav-item">Create Account</span></b-nav-item
+    <div :class="shouldCollapse ?'collapse' : '' " class="navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/"
+            >Home <span class="sr-only">(current)</span></a
           >
-          <b-nav-item-dropdown right>
-            <!-- Using 'button-content' slot -->
-            <template v-slot:button-content>
-              <em>User</em>
-            </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/how-to-order">How to order</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="become-a-partner">Become a partner</a>
+        </li>
+        <li class="nav-item">
+          <a @click="handleAuthModalToggle" class="nav-link" href="#">Login | Signup</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
+<script>
+import { mapActions } from "vuex";
+export default {
+  name: "theHeader",
+  data () {
+    return {
+      shouldCollapse: true
+    };
+  },
+  methods: {
+    ...mapActions(["handleAuthModalToggle"]),
+    toggleNav () {
+      this.shouldCollapse = !this.shouldCollapse;
+    }
+  }
+};
+</script>
+
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
-.header-container {
-  height: 10%;
+@import "@/assets/scss/index.scss";
   .navbar-brand {
     & span:first-child {
       color: $danger-color;
@@ -47,5 +71,4 @@
       color: $warning-color;
     }
   }
-}
 </style>
