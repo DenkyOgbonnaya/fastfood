@@ -7,7 +7,7 @@ const resolvers = require("./server/graphql/resolvers");
 const { verifyToken } = require("./server/utils");
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000;
 app.use(cors());
 
 const server = new ApolloServer({
@@ -15,7 +15,7 @@ const server = new ApolloServer({
   resolvers,
   context: async ({ req }) => {
     const token = req.headers["x-token"];
-    const { currentUser } = await verifyToken(token);
+    const currentUser  = await verifyToken(token).currentUser || '';
 
     return {
       currentUser

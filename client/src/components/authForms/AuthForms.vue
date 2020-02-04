@@ -22,14 +22,14 @@
         </a>
       </li>
     </ul>
-    <LoginForm v-if="showLogin"/>
-    <SignupForm v-if="showSignUp"/>
+    <TheLoginForm v-if="showLogin"/>
+    <TheSignupForm v-if="showSignUp"/>
   </div>
 </template>
 
 <script>
-import LoginForm from './LoginForm'
-import SignupForm from './SignupForm'
+import TheLoginForm from './TheLoginForm'
+import TheSignupForm from './TheSignupForm'
 export default {
   name: 'AUthForms',
   data () {
@@ -39,8 +39,8 @@ export default {
     }
   },
   components: {
-    LoginForm,
-    SignupForm
+    TheLoginForm,
+    TheSignupForm
   },
   methods: {
     renderLoginForm () {

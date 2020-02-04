@@ -17,23 +17,48 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div :class="shouldCollapse ?'collapse' : '' " class="navbar-collapse" id="navbarSupportedContent">
+    <div
+      :class="shouldCollapse ? 'collapse' : ''"
+      class="navbar-collapse"
+      id="navbarSupportedContent"
+    >
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/"
-            >Home <span class="sr-only">(current)</span></a
-          >
+          <router-link class="nav-link" to="/"
+            >Home <span class="sr-only">(current)</span>
+          </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/how-to-order">How to order</a>
+          <router-link class="nav-link" to="/how-to-order">How to order</router-link>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="become-a-partner">Become a partner</a>
+          <router-link class="nav-link" to="become-a-partner">Become a partner</router-link>
         </li>
-        <li class="nav-item">
-          <a @click="handleAuthModalToggle" class="nav-link" href="#">Login | Signup</a>
+        <li
+          class="nav-item"
+          v-if="isAuthenticated()"
+        >
+          <router-link class="nav-link" to="user-profile">
+            {{isAuthenticated().fullname}}
+          </router-link>
+        </li>
+        <li
+          class="nav-item"
+          v-if="!isAuthenticated()"
+        >
+          <a @click="handleAuthModalToggle" class="nav-link" href="#"
+            >Login | Signup</a
+          >
+        </li>
+        <li
+          class="nav-item"
+          v-if="isAuthenticated()"
+        >
+          <a @click="handleLogout" class="nav-link" href="/"
+            >Logout</a
+          >
         </li>
       </ul>
     </div>
@@ -41,7 +66,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "theHeader",
   data () {
@@ -50,7 +75,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["handleAuthModalToggle"]),
+    ...mapActions(["handleAuthModalToggle", "handleLogout"]),
+    ...mapGetters(["isAuthenticated"]),
     toggleNav () {
       this.shouldCollapse = !this.shouldCollapse;
     }
@@ -60,15 +86,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/index.scss";
-  .navbar-brand {
-    & span:first-child {
-      color: $danger-color;
-      font-size: 30px;
-      font-weight: map-get($font-weights, bold);
-    }
-    & span:last-child {
-      @extend span:first-child;
-      color: $warning-color;
-    }
+.navbar-brand {
+  & span:first-child {
+    color: $danger-color;
+    font-size: 30px;
+    font-weight: map-get($font-weights, bold);
   }
+  & span:last-child {
+    @extend span:first-child;
+    color: $warning-color;
+  }
+}
 </style>
