@@ -1,19 +1,27 @@
 <template>
   <div class="card-container">
-    <div class="card_body">
-      <h5>Jamals Shawama</h5>
+    <div
+      class="card_body"
+      :style="{backgroundImage:`url(${restaurant.coverPhoto})`}"
+    >
+      <h5>{{restaurant.name}}</h5>
     </div>
     <div class="card_footer">
       <div class="restaurant-city">
-        <span> Garki</span>
-        <button class="btn btn-outline-danger btn-sm">Menu</button>
+        <span>{{restaurant.city}}</span>
+        <button
+          class="btn btn-outline-danger btn-sm"
+          @click="viewMenu(restaurant.name)"
+        >
+          Menu
+        </button>
       </div>
       <div class="text-muted">
         <font-awesome-icon
           icon="shopping-cart"
           class="f-awesome"
         />
-        Delivery Time: 50 min
+        Delivery Time: {{restaurant.delivTime}}
       </div>
     </div>
   </div>
@@ -24,6 +32,11 @@ export default {
   name: 'RestaurantCard',
   props: {
     restaurant: Object
+  },
+  methods: {
+    viewMenu (restaurantName) {
+      this.$router.push(`/restaurants/${restaurantName}`);
+    }
   }
 }
 </script>
@@ -42,6 +55,7 @@ export default {
   .card_body>h5{
     align-self: flex-end;
     color: #ffffff;
+    font-weight: bold;
   }
   .card_footer {
     height: 100px;

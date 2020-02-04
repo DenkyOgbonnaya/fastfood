@@ -1,5 +1,4 @@
 export default {
-  isAuthenticated: state => {
-    return state.currentUser;
-  }
+  isAuthenticated: state => state.currentUser,
+  getRestaurants: state => state.restaurants
 };

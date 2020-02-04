@@ -22,3 +22,14 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
+export const GET_RESTAURANTS = gql`
+  query getRestaurants {
+    restaurants{
+      id
+      name
+      city
+      delivTime,
+      coverPhoto
+    }
+  }
+`;

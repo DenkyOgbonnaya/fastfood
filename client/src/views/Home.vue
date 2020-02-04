@@ -34,7 +34,7 @@
       <div class="meal-filter-mobi">
         <RestaurantFilter :isExpanded="false"/>
       </div>
-      <RestaurantList :restaurants="restaurants" />
+      <RestaurantList :restaurants="getRestaurants()" />
     </section>
     <div class="offer_container">
         <div class="offer_card">
@@ -61,21 +61,21 @@ import OrderFlow from '@/components/OrderFlow'
 import RestaurantList from '@/components/restaurants/RestaurantList'
 import RestaurantFilter from '@/components/restaurants/RestaurantFilter'
 import SubscriptionDeals from '@/components/SubscriptionDeals'
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: 'home',
-  data () {
-    return {
-      restaurants: [
-        { _id: '1', name: 'KFC' },
-        { _id: '2', name: 'KFC' }
-      ]
-    }
-  },
   components: {
     OrderFlow,
     RestaurantList,
     RestaurantFilter,
     SubscriptionDeals
+  },
+  mounted () {
+    this.handleGetRestaurants();
+  },
+  methods: {
+    ...mapActions(["handleGetRestaurants"]),
+    ...mapGetters(["getRestaurants"])
   }
 }
 </script>

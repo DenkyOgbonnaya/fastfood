@@ -13,7 +13,7 @@ const { uploadPhoto } = require("../../utils");
 
 const restaurantResolver = {
   Query: {
-    getRestaurant: async (parent, { id }) => {
+    restaurant: async (parent, { id }) => {
       // get restaurant with given id
       try {
         return await getSingle(id);
@@ -21,7 +21,7 @@ const restaurantResolver = {
         throw err;
       }
     },
-    getRestaurants: async () => {
+    restaurants: async () => {
       // get all restaurants
       try {
         return await getAll();

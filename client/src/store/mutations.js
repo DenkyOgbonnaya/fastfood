@@ -14,5 +14,8 @@ export default {
   },
   removeCurrentUser: (state) => {
     state.currentUser = null;
+  },
+  addRestaurants: (state, restaurants) => {
+    state.restaurants = restaurants;
   }
 };
