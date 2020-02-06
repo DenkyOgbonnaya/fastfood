@@ -5,42 +5,49 @@
         <h4>Menu</h4>
         <h4>Details</h4>
       </div>
-      <div class="card-body">
-        <MenuMeal/>
-        <MenuMeal/>
-        <MenuMeal/>
+      <div class="card-body" v-if="menu.length">
+        <MenuMeal
+          v-for="menuItem in menu"
+          :key="menuItem.id"
+          :menuItem="menuItem"
+        />
+        <MenuMeal />
+        <MenuMeal />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import MenuMeal from './MenuMeal'
+import MenuMeal from "./MenuMeal";
 export default {
-  name: 'RestaurantMenu',
+  name: "RestaurantMenu",
   components: {
     MenuMeal
+  },
+  props: {
+    menu: Array
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/index.scss";
-  .wrapper {
-    @include desktop() {
-      min-width: 450px
+.wrapper {
+  @include desktop() {
+    min-width: 450px;
+  }
+  .card {
+    border: none;
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      background: $warning-color;
+      color: $light-color;
     }
-    .card {
-      border: none;
-      .card-header {
-        display: flex;
-        justify-content: space-between;
-        background: $warning-color;
-        color: $light-color;
-      }
-      .card-body * {
-        margin-bottom: 2px;
-      }
+    .card-body * {
+      margin-bottom: 2px;
     }
   }
+}
 </style>

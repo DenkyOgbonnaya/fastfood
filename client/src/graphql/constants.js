@@ -33,3 +33,29 @@ export const GET_RESTAURANTS = gql`
     }
   }
 `;
+export const GET_RESTAURANT = gql`
+  query getRestaurant($name: String!) {
+    restaurant(name: $name){
+      id
+      name
+      address
+      description
+      coverPhoto
+      menu {
+        id
+        name
+        photo
+        meals {
+          id
+          name
+          price
+          extras {
+            id
+            name
+            price
+          }
+        }
+      }
+    }
+  }
+`;

@@ -12,10 +12,40 @@ export default {
   setCurrentUser: (state, currentUser) => {
     state.currentUser = currentUser;
   },
-  removeCurrentUser: (state) => {
+  removeCurrentUser: state => {
     state.currentUser = null;
   },
   addRestaurants: (state, restaurants) => {
     state.restaurants = restaurants;
+  },
+  addRestaurant: (state, restaurant) => {
+    state.restaurant = restaurant;
+  },
+  updateCarts: (state, { restaurantId, cart }) => {
+    const updatedCarts = {
+      ...state.carts,
+      [restaurantId]: cart
+    };
+    state.carts = updatedCarts;
+  },
+  updateMealQty: (state, { restaurantId, mealId, qty }) => {
+    let cart = state.carts[restaurantId];
+    const updatedMeals = cart.map(item =>
+      item.id === mealId
+        ? Object.assign({}, item, { qty })
+        : item
+    );
+    const updatedCarts = {
+      ...state.carts,
+      [restaurantId]: updatedMeals
+    };
+    state.carts = updatedCarts;
+  },
+  emptyCart: (state, restaurantId) => {
+    const updatedCarts = {
+      ...state.carts,
+      [restaurantId]: []
+    };
+    state.carts = updatedCarts;
   }
 };

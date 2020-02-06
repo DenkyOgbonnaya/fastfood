@@ -31,7 +31,7 @@ const routes = [
     component: HowToOrder
   },
   {
-    path: '/restaurant',
+    path: '/restaurants/:name',
     name: 'restaurant',
     component: Restaurant
   },

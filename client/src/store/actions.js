@@ -1,5 +1,5 @@
 import apollo from "../apolloClient";
-import { SIGN_UP_MUTATION, LOGIN_MUTATION, GET_RESTAURANTS } from "../graphql/constants";
+import { SIGN_UP_MUTATION, LOGIN_MUTATION, GET_RESTAURANTS, GET_RESTAURANT } from "../graphql/constants";
 
 export default {
   handleSignup: async ({ commit }, { fullname, email, password }) => {
@@ -56,5 +56,40 @@ export default {
     } catch (err) {
       console.log(err);
     }
+  },
+  handleGetRestaurant: async ({ commit }, name) => {
+    try {
+      const { data } = await apollo.query({
+        query: GET_RESTAURANT,
+        variables: {
+          name
+        }
+      });
+      commit("addRestaurant", data.restaurant);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  handleGetMenuMeals: async ({ commit }, menuId) => {
+    try {
+      const { data } = await apollo.query({
+        query: GET_RESTAURANT,
+        variables: {
+          menuId
+        }
+      });
+      commit("addRestaurant", data.restaurant);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  handleUpdateCarts: ({ commit }, data) => {
+    commit("updateCarts", data);
+  },
+  handleUpdateMealQty: ({ commit }, data) => {
+    commit("updateMealQty", data);
+  },
+  handleEmptyCart: ({ commit }, restaurantId) => {
+    commit("emptyCart", restaurantId);
   }
 };
