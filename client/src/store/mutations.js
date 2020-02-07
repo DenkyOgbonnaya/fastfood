@@ -48,5 +48,12 @@ export default {
       [restaurantId]: []
     };
     state.carts = updatedCarts;
+  },
+  searchRestaurant: (state, { rows, count }) => {
+    state = {
+      ...state,
+      restaurants: rows,
+      restaurantsCount: count
+    }
   }
 };

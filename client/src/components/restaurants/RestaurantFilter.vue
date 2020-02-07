@@ -5,71 +5,74 @@
         @click="toggleCardBody"
         :class="shouldExpand ? '' : 'dropdown-toggle'"
         class="card-header"
-        bg='white'
-        >
-        <font-awesome-icon
-          icon="filter"
-          style="color: rgb(255, 153, 0)"
-        />
+        bg="white"
+      >
+        <font-awesome-icon icon="filter" style="color: rgb(255, 153, 0)" />
         Filters
       </div>
-      <div class="card-body" :class="shouldExpand ? 'visible-cardbody' : 'hidden-cardbody'">
+      <div
+        class="card-body"
+        :class="shouldExpand ? 'visible-cardbody' : 'hidden-cardbody'"
+      >
         <h6 class="card-title text-muted">Seach</h6>
-        <input type="search"
+        <input
+          type="search"
           name="search"
+          v-model="search"
           class="form-control"
           placeholder="name, city"
-        >
-        <hr>
+          :change="handleRestaurantsSearch(search)"
+        />
+        <hr />
         <h6 class="card-title text-muted">Filter</h6>
         <select
-          name="filter"
-          class="form-control"
+          v-model="filter"
+          class="form-control select"
+          @change="handleGetRestaurants({ order: filter })"
         >
-          <option value="delivery">Fast delivery</option>
-          <option value="priceLow">Price low-high</option>
-          <option value="priceHigh">Price high-low</option>
+          <option value="ASC">RestaurantName A-Z</option>
+          <option value="DESC">RestaurantName Z-A</option>
         </select>
       </div>
-      <button class="btn btn-warning card-footer">
-        <font-awesome-icon
-          icon="search"
-          style="color: #ffffff"
-        />
-        Search
-      </button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: 'restaurantFilter',
+  name: "restaurantFilter",
   data () {
     return {
-      shouldExpand: this.isExpanded || false
-    }
+      shouldExpand: this.isExpanded || false,
+      search: "",
+      filter: "ASC"
+    };
   },
   props: {
     isExpanded: Boolean
   },
   methods: {
+    ...mapActions(["handleRestaurantsSearch", "handleGetRestaurants"]),
     toggleCardBody () {
-      this.shouldExpand = !this.shouldExpand
+      this.shouldExpand = !this.shouldExpand;
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import "@/assets/scss/index.scss";
 .card {
   width: 200px;
   margin: 5%;
-  @include desktop(){
+  @include desktop() {
     margin: 0;
     width: 230px;
   }
-  .visibl-cardbody{
+  .select {
+    font-size: 12px;
+  }
+  .visibl-cardbody {
     display: block;
   }
   .hidden-cardbody {
@@ -78,12 +81,6 @@ export default {
   .card-header {
     background: $light-color;
     height: 40px;
-  }
-  .card-footer {
-    background: rgb(255, 153, 0);
-    color: $light-color;
-    height: 40px;
-    padding: 10px;
   }
 }
 </style>

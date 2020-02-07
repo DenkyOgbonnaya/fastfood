@@ -23,8 +23,8 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 export const GET_RESTAURANTS = gql`
-  query getRestaurants($page: Int!, $limit: Int) {
-    restaurants(page: $page, limit: $limit){
+  query getRestaurants($page: Int!, $limit: Int, $order: String) {
+    restaurants(page: $page, limit: $limit, order: $order){
       rows{
         id
         name
@@ -59,6 +59,20 @@ export const GET_RESTAURANT = gql`
           }
         }
       }
+    }
+  }
+`;
+export const SEARCH_RESTAURANTS = gql`
+  query searchRestaurants($search: String!){
+    search(search: $search) {
+      rows{
+        id
+        name
+        city
+        delivTime,
+        coverPhoto
+      }
+      count
     }
   }
 `;

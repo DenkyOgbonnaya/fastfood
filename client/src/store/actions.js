@@ -3,7 +3,8 @@ import {
   SIGN_UP_MUTATION,
   LOGIN_MUTATION,
   GET_RESTAURANTS,
-  GET_RESTAURANT
+  GET_RESTAURANT,
+  SEARCH_RESTAURANTS
 } from "../graphql/constants";
 
 export default {
@@ -52,13 +53,14 @@ export default {
     localStorage.removeItem("token");
     commit("removeCurrentUser");
   },
-  handleGetRestaurants: async ({ commit }, { page = 1, limit = 4 }) => {
+  handleGetRestaurants: async ({ commit }, { page = 1, limit = 4, order = "ASC" }) => {
     try {
       const { data } = await apollo.query({
         query: GET_RESTAURANTS,
         variables: {
           page,
-          limit
+          limit,
+          order
         }
       });
       commit("addRestaurants", data.restaurants);
@@ -100,5 +102,18 @@ export default {
   },
   handleEmptyCart: ({ commit }, restaurantId) => {
     commit("emptyCart", restaurantId);
+  },
+  handleRestaurantsSearch: async ({ commit }, search) => {
+    try {
+      const { data } = await apollo.query({
+        query: SEARCH_RESTAURANTS,
+        variables: {
+          search
+        }
+      });
+      commit("addRestaurants", data.search);
+    } catch (err) {
+      console.log(err);
+    }
   }
 };

@@ -3,7 +3,8 @@ const { gql } = require("apollo-server-express");
 const restaurantSchema = gql`
   extend type Query {
     restaurant(name: String!): Restaurant
-    restaurants(page: Int, limit: Int): RestaurantsResult!
+    restaurants(page: Int, limit: Int, order: String): RestaurantsResult!
+    search(search: String!): RestaurantsResult!
   },
   extend type Mutation {
     registerRestaurant(

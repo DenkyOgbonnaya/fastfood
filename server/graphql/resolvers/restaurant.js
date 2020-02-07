@@ -5,7 +5,8 @@ const {
   getAll,
   add,
   deleteOne,
-  editOne
+  editOne,
+  searchRestaurants
 } = require("../../restaurant").restaurantService();
 const { getRestaurantMenu } = require("../../menu/menu-service")();
 const uploader = require("../../configs/cloudinary-config");
@@ -25,31 +26,37 @@ const restaurantResolver = {
       // get all restaurants
       try {
         const { rows, count } = await getAll(args);
-        
+
         return {
           rows,
           count
-        }
+        };
       } catch (err) {
         throw err;
+      }
+    },
+    search: async (parent, { search }) => {
+      try {
+        const { rows, count } = await searchRestaurants(search);
+        return { rows, count };
+      } catch (err) {
+        throw new Error(err.message);
       }
     }
   },
   Mutation: {
-    registerRestaurant: combineResolvers(
-      async (parent, args) => {
-        try {
-          // gets the cover photo url
-          const coverPhoto = await uploadPhoto(args.coverPhoto, uploader);
-          const newRestaurant = { ...args, coverPhoto };
+    registerRestaurant: combineResolvers(async (parent, args) => {
+      try {
+        // gets the cover photo url
+        const coverPhoto = await uploadPhoto(args.coverPhoto, uploader);
+        const newRestaurant = { ...args, coverPhoto };
 
-          // add the new restaurant to db
-          return await add(newRestaurant);
-        } catch (err) {
-          throw err;
-        }
+        // add the new restaurant to db
+        return await add(newRestaurant);
+      } catch (err) {
+        throw err;
       }
-    ),
+    }),
     editRestaurant: combineResolvers(
       isAuthenticated,
       isRestaurantOwner,
