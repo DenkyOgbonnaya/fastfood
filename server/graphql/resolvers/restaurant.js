@@ -13,18 +13,23 @@ const { uploadPhoto } = require("../../utils");
 
 const restaurantResolver = {
   Query: {
-    restaurant: async (parent, { id }) => {
+    restaurant: async (parent, { name }) => {
       // get restaurant with given id
       try {
-        return await getSingle(id);
+        return await getSingle(name);
       } catch (err) {
         throw err;
       }
     },
-    restaurants: async () => {
+    restaurants: async (parent, args) => {
       // get all restaurants
       try {
-        return await getAll();
+        const { rows, count } = await getAll(args);
+        
+        return {
+          rows,
+          count
+        }
       } catch (err) {
         throw err;
       }
@@ -32,7 +37,6 @@ const restaurantResolver = {
   },
   Mutation: {
     registerRestaurant: combineResolvers(
-      isAuthenticated,
       async (parent, args) => {
         try {
           // gets the cover photo url

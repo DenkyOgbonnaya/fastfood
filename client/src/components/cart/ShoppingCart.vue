@@ -63,7 +63,16 @@ export default {
     CartItemList
   },
   methods: {
-    ...mapActions(["handleEmptyCart"])
+    ...mapActions(["handleEmptyCart"]),
+    scrollToElement () {
+      const el = this.$el.getElementsByClassName("card-header")[0];
+      if (el) {
+        el.scrollIntoView();
+      }
+    }
+  },
+  mounted () {
+    this.scrollToElement();
   },
   computed: {
     ...mapGetters(["getCart", "getCartTotal"]),
@@ -75,7 +84,9 @@ export default {
   },
   filters: {
     formatCurrency (val) {
-      const formated = Number(val).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      const formated = Number(val)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, "$&,");
       return `₦${formated}`;
     }
   }

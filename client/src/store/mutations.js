@@ -15,8 +15,9 @@ export default {
   removeCurrentUser: state => {
     state.currentUser = null;
   },
-  addRestaurants: (state, restaurants) => {
-    state.restaurants = restaurants;
+  addRestaurants: (state, { rows, count }) => {
+    state.restaurants = rows;
+    state.restaurantsCount = count
   },
   addRestaurant: (state, restaurant) => {
     state.restaurant = restaurant;

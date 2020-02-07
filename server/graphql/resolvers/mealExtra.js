@@ -8,7 +8,7 @@ const {
 
 const mealExtraResolver = {
   Mutation: {
-    addMealExtra: combineResolvers(isAuthenticated, async (parent, args) => {
+    addMealExtra: combineResolvers(async (parent, args) => {
       try {
         // add the meal extra to db
         return await addMealExtra(args);

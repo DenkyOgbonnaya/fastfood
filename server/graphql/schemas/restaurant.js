@@ -2,8 +2,8 @@ const { gql } = require("apollo-server-express");
 
 const restaurantSchema = gql`
   extend type Query {
-    restaurant(id: ID!): Restaurant
-    restaurants: [Restaurant!]
+    restaurant(name: String!): Restaurant
+    restaurants(page: Int, limit: Int): RestaurantsResult!
   },
   extend type Mutation {
     registerRestaurant(
@@ -50,6 +50,10 @@ const restaurantSchema = gql`
     coverPhoto: String!
     ownerId: ID!
     menu: [Menu!]
+  },
+  type RestaurantsResult {
+    rows: [Restaurant!]
+    count: Int!
   }
 `;
 module.exports = restaurantSchema;

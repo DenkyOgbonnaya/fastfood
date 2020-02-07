@@ -6,7 +6,7 @@
         <p>Specify your address to suggest you the fast delivery</p>
         <p>Food from your favorite restaurants delivered directly to you</p>
       </div>
-      <form >
+      <form>
         <div class="form-group">
           <label for="location">Location*</label>
           <select name="location" class="form-control">
@@ -29,41 +29,41 @@
     <h4>Order Food Online From Your Favourite Restuarants</h4>
     <section class="restaurant-list">
       <div class="meal-filter-desk">
-        <RestaurantFilter :isExpanded="true"/>
+        <RestaurantFilter :isExpanded="true" />
       </div>
       <div class="meal-filter-mobi">
-        <RestaurantFilter :isExpanded="false"/>
+        <RestaurantFilter :isExpanded="false" />
       </div>
       <RestaurantList :restaurants="getRestaurants()" />
     </section>
     <div class="offer_container">
-        <div class="offer_card">
-            <h3 class="card-title">Get Breakfast and Lunch deals</h3>
-            <p class="card-text">
-              Direct to your office starting from N5000/Week
-            </p>
-            <button class="btn btn-warning">Comming Soon</button>
-        </div>
-        <div class="offer_card">
-            <h3 class="card-title">Partnership => Open Now</h3>
-            <p class="card-text">
-              We are open to partnerships for bulk purchases.
-            </p>
-            <button class="btn btn-warning">Sign Up</button>
-        </div>
+      <div class="offer_card">
+        <h3 class="card-title">Get Breakfast and Lunch deals</h3>
+        <p class="card-text">
+          Direct to your office starting from N5000/Week
+        </p>
+        <button class="btn btn-warning">Comming Soon</button>
+      </div>
+      <div class="offer_card">
+        <h3 class="card-title">Partnership => Open Now</h3>
+        <p class="card-text">
+          We are open to partnerships for bulk purchases.
+        </p>
+        <button class="btn btn-warning">Sign Up</button>
+      </div>
     </div>
-    <SubscriptionDeals/>
+    <SubscriptionDeals />
   </div>
 </template>
 
 <script>
-import OrderFlow from '@/components/OrderFlow'
-import RestaurantList from '@/components/restaurants/RestaurantList'
-import RestaurantFilter from '@/components/restaurants/RestaurantFilter'
-import SubscriptionDeals from '@/components/SubscriptionDeals'
+import OrderFlow from "@/components/OrderFlow";
+import RestaurantList from "@/components/restaurants/RestaurantList";
+import RestaurantFilter from "@/components/restaurants/RestaurantFilter";
+import SubscriptionDeals from "@/components/SubscriptionDeals";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  name: 'home',
+  name: "home",
   components: {
     OrderFlow,
     RestaurantList,
@@ -71,19 +71,23 @@ export default {
     SubscriptionDeals
   },
   mounted () {
-    this.handleGetRestaurants();
+    const paginationOptions = {
+      page: 1,
+      limit: 4
+    };
+    this.handleGetRestaurants(paginationOptions);
   },
   methods: {
     ...mapActions(["handleGetRestaurants"]),
     ...mapGetters(["getRestaurants"])
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index.scss';
+@import "@/assets/scss/index.scss";
 
-  .home-view-container {
+.home-view-container {
   section:first-child {
     color: $light-color;
     background-image: url("~@/assets/images/home-banner.jpg");
@@ -97,22 +101,22 @@ export default {
     }
   }
   h4 {
-      margin-top: map-get($margins, top);
-      margin-bottom: map-get($margins, bottom);
-      font-weight: map-get($font-weights, bold);
-      text-align: center;
+    margin-top: map-get($margins, top);
+    margin-bottom: map-get($margins, bottom);
+    font-weight: map-get($font-weights, bold);
+    text-align: center;
     @include desktop() {
       margin-top: map-get($margins-desktop, top);
       margin-bottom: map-get($margins-desktop, bottom);
     }
-  };
+  }
   .restaurant-list {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     & .meal-filter-desk {
       display: none;
-    };
+    }
     & .meal-filter-mobi {
       display: block;
     }
@@ -127,22 +131,22 @@ export default {
       }
     }
   }
-  .offer_container{
+  .offer_container {
     margin-top: map-get($margins, top);
     & div:first-child {
-        background-image: url("~@/assets/images/banner-1.jpg");
-        background-size: cover;
-        text-align: left;
-        color: $light-color;
-        width: 92%;
-        padding: 20px;
-        margin: 3%;
+      background-image: url("~@/assets/images/banner-1.jpg");
+      background-size: cover;
+      text-align: left;
+      color: $light-color;
+      width: 92%;
+      padding: 20px;
+      margin: 3%;
     }
     & div:last-child {
-        @extend div:first-child;
-        background-image: url("~@/assets/images/banner-2.jpg");
+      @extend div:first-child;
+      background-image: url("~@/assets/images/banner-2.jpg");
     }
-    @include desktop(){
+    @include desktop() {
       display: flex;
       margin-top: map-get($margins-desktop, top);
       & div {
@@ -154,13 +158,13 @@ export default {
     & section:first-child {
       display: flex;
       justify-content: space-around;
-      &>div {
+      & > div {
         display: block;
-        font-weight: map-get($font-weights, bold );
+        font-weight: map-get($font-weights, bold);
         font-size: 20px;
         h1 {
-          font-weight: map-get($font-weights, bold );
-          margin-top: map-get($margins-desktop, top );
+          font-weight: map-get($font-weights, bold);
+          margin-top: map-get($margins-desktop, top);
         }
       }
       & form {

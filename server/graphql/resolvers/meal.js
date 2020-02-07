@@ -9,7 +9,7 @@ const { getMealExtra } = require("../../mealExtra/mealExtra-service")();
 
 const mealResolver = {
   Mutation: {
-    addMeal: combineResolvers(isAuthenticated, async (parent, args) => {
+    addMeal: combineResolvers(async (parent, args) => {
       try {
         // add the meal to db
         return await addMeal(args);

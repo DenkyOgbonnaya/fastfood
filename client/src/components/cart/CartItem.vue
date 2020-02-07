@@ -58,7 +58,9 @@ export default {
   },
   filters: {
     formatCurrency (val) {
-      const formated = (Number(val)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      const formated = Number(val)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, "$&,");
       return `₦${formated}`;
     }
   }

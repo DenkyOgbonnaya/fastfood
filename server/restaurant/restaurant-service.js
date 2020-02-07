@@ -9,16 +9,20 @@ const restaurantService = () => {
       throw err;
     }
   };
-  const getAll = async () => {
+  const getAll = async ({ limit = 4, page = 1 }) => {
+    page = Number(page);
+    limit = Number(limit);
+
+    const offset = (page * limit) - limit;
     try {
-      return Restaurant.findAll();
+      return await Restaurant.findAndCountAll({ offset, limit});
     } catch (err) {
       throw err;
     }
   };
-  const getSingle = async id => {
+  const getSingle = async name => {
     try {
-      return await Restaurant.findOne({ where: { id } });
+      return await Restaurant.findOne({ where: { name } });
     } catch (err) {
       throw err;
     }

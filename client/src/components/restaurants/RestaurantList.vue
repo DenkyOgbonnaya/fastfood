@@ -11,15 +11,24 @@
               <RestaurantCard :restaurant="restaurant"/>
             </div>
         </div>
-        <AppPagination />
+        <AppPagination
+          :pages="pages"
+          @changePage="handlePageChange"
+        />
     </div>
 </template>
 
 <script>
 import RestaurantCard from './RestaurantCard'
 import AppPagination from '../AppPagination'
+import { mapState, mapActions } from "vuex";
 export default {
-  name: 'RestaurantList',
+  name: 'restaurantList',
+  data () {
+    return {
+      limit: 4
+    }
+  },
   components: {
     RestaurantCard,
     AppPagination
@@ -27,9 +36,25 @@ export default {
   props: {
     restaurants: Array
   },
+  methods: {
+    ...mapActions(["handleGetRestaurants"]),
+    handlePageChange (page) {
+      const paginationOptions = {
+        page,
+        limit: this.limit
+      }
+      this.handleGetRestaurants(paginationOptions);
+    }
+  },
   computed: {
+    ...mapState(["restaurantsCount"]),
     isRestuarants () {
       return this.restaurants.length
+    },
+    pages () {
+      const limit = this.limit;
+      const restaurantsCount = this.restaurantsCount;
+      return Math.ceil(restaurantsCount / limit);
     }
   }
 }

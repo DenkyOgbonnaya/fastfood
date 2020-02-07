@@ -41,7 +41,16 @@ export default {
     this.handleGetRestaurant(restaurantName);
   },
   methods: {
-    ...mapActions(["handleGetRestaurant"])
+    ...mapActions(["handleGetRestaurant"]),
+    scrollToElement () {
+      const el = this.$el.getElementsByClassName("shopping-cart")[0];
+      if (el) {
+        el.scrollIntoView();
+      }
+    }
+  },
+  updated () {
+    this.scrollToElement();
   },
   computed: {
     ...mapState(["restaurant"]),

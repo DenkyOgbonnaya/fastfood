@@ -1,5 +1,10 @@
 import apollo from "../apolloClient";
-import { SIGN_UP_MUTATION, LOGIN_MUTATION, GET_RESTAURANTS, GET_RESTAURANT } from "../graphql/constants";
+import {
+  SIGN_UP_MUTATION,
+  LOGIN_MUTATION,
+  GET_RESTAURANTS,
+  GET_RESTAURANT
+} from "../graphql/constants";
 
 export default {
   handleSignup: async ({ commit }, { fullname, email, password }) => {
@@ -47,10 +52,14 @@ export default {
     localStorage.removeItem("token");
     commit("removeCurrentUser");
   },
-  handleGetRestaurants: async ({ commit }) => {
+  handleGetRestaurants: async ({ commit }, { page = 1, limit = 4 }) => {
     try {
       const { data } = await apollo.query({
-        query: GET_RESTAURANTS
+        query: GET_RESTAURANTS,
+        variables: {
+          page,
+          limit
+        }
       });
       commit("addRestaurants", data.restaurants);
     } catch (err) {
