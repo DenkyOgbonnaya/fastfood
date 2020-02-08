@@ -11,9 +11,11 @@
           :key="menuItem.id"
           :menuItem="menuItem"
         />
-        <MenuMeal />
-        <MenuMeal />
       </div>
+      <div
+        v-else
+        class="jumbotron"
+      >Menu unavailable!</div>
     </div>
   </div>
 </template>
@@ -47,6 +49,10 @@ export default {
     }
     .card-body * {
       margin-bottom: 2px;
+    }
+    .jumbotron {
+      text-align: center;
+      background: whitesmoke;
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <header :style="{backgroundImage:`url(${getCoverPhoto})`}">
+    <header>
       <nav class="header-nav" aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -10,9 +10,16 @@
         </ol>
       </nav>
       <div class="restaurant-intro" v-if="restaurant">
+        <img :src="restaurant.coverPhoto" alt="restaurant-logo">
         <h1>{{restaurant.name || ''}}: Restaurant</h1>
         <p>{{restaurant.description || ''}}</p>
-        <p>{{restaurant.address || ''}}</p>
+        <p>
+          <font-awesome-icon
+            icon="map-marker-alt"
+            style="color: #ffffff"
+           />
+          {{restaurant.address || ''}}
+        </p>
       </div>
     </header>
     <main v-if="restaurant">
@@ -53,10 +60,7 @@ export default {
     this.scrollToElement();
   },
   computed: {
-    ...mapState(["restaurant"]),
-    getCoverPhoto () {
-      return this.restaurant ? this.restaurant.coverPhoto : "~@/assets/images/home-banner.jpg";
-    }
+    ...mapState(["restaurant"])
   }
 };
 </script>
@@ -75,7 +79,12 @@ export default {
       text-align: center;
       color: $light-color;
       p {
-        color: $danger-color;
+        color: $light-color;
+        font-weight: bold;
+      }
+      img {
+        max-width: 80px;
+        max-height: 80px;
       }
     }
   }

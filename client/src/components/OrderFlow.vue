@@ -68,7 +68,7 @@ export default {
       padding: 5px;
       h5 {
         font-weight: map-get($font-weights, bold );
-        color: #221122;
+        color: #212121;
         text-align: left;
       }
       p {

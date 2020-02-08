@@ -55,6 +55,10 @@ export default {
   .card_body>h5{
     align-self: flex-end;
     color: #ffffff;
+    background: #212121;
+    opacity: 0.7;
+    padding: 2px;
+    width: 100%;
     font-weight: bold;
   }
   .card_footer {

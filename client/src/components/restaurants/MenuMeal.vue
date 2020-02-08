@@ -165,6 +165,9 @@ export default {
     justify-content: space-between;
     background: $light-color;
     font-size: 25px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 .f-awsome {

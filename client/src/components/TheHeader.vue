@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
     <span class="navbar-brand">
       <span>Fast</span>
       <span>Food</span>
@@ -29,12 +29,18 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/how-to-order">How to order</router-link>
+          <router-link class="nav-link text-light" to="/how-to-order">How to order</router-link>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link class="nav-link" to="become-a-partner">Become a partner</router-link>
+          <router-link class="nav-link text-warning" to="become-a-partner">
+            Become a partner
+            <font-awesome-icon
+            icon="hands-helping"
+            style="color: #ffffff"
+           />
+          </router-link>
         </li>
         <li
           class="nav-item"
@@ -48,7 +54,7 @@
           class="nav-item"
           v-if="!isAuthenticated()"
         >
-          <a @click="handleAuthModalToggle" class="nav-link" href="#"
+          <a @click="handleAuthModalToggle" class="nav-link text-light" href="#"
             >Login | Signup</a
           >
         </li>
@@ -56,7 +62,7 @@
           class="nav-item"
           v-if="isAuthenticated()"
         >
-          <a @click="handleLogout" class="nav-link" href="/"
+          <a @click="handleLogout" class="nav-link text-light" href="/"
             >Logout</a
           >
         </li>
@@ -87,8 +93,8 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/index.scss";
 .navbar-brand {
-  & span:first-child {
-    color: $danger-color;
+  & span:first-child{
+    color: $light-color;
     font-size: 30px;
     font-weight: map-get($font-weights, bold);
   }

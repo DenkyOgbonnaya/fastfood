@@ -45,7 +45,14 @@
         <button class="btn btn-warning">Comming Soon</button>
       </div>
       <div class="offer_card">
-        <h3 class="card-title">Partnership => Open Now</h3>
+        <h3 class="card-title">
+          Partnership
+          <span class="text-warning">
+          <font-awesome-icon
+          icon="long-arrow-alt-right"
+          />
+          </span>
+          Open Now</h3>
         <p class="card-text">
           We are open to partnerships for bulk purchases.
         </p>
