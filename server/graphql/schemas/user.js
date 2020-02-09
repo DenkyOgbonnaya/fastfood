@@ -3,7 +3,8 @@ const { gql } = require("apollo-server-express");
 const userSchema = gql`
   extend type Query {
     users: [User!],
-    user(id: ID!): User
+    user(id: ID!): User,
+    verifyToken(token: String!):Boolean
   },
   extend type Mutation {
     signup(fullname: String!, email: String!, password: String!): Token,

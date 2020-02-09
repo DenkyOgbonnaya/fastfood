@@ -45,7 +45,7 @@ const restaurantResolver = {
     }
   },
   Mutation: {
-    registerRestaurant: combineResolvers(async (parent, args) => {
+    registerRestaurant: combineResolvers(isAuthenticated, async (parent, args) => {
       try {
         // gets the cover photo url
         const coverPhoto = await uploadPhoto(args.coverPhoto, uploader);

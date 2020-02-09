@@ -1,10 +1,19 @@
 const { createUser, loginUser } = require("../../user").userController();
+const { verifyToken } = require("../../utils");
 
 const userResolver = {
   Query: {
     users: (parent, args) => {},
     user: (parent, { id }, { models }) => {
       //
+    },
+    verifyToken: async (parent, { token }) => {
+      try {
+        const isValidToken = await verifyToken(token);
+        if (isValidToken) return true;
+      } catch (err) {
+        throw err;
+      }
     }
   },
   Mutation: {

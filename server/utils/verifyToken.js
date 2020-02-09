@@ -6,6 +6,7 @@ const { SECRET_KEY } = process.env;
 
 const verifyToken = async token => {
   if (token) {
+    if (token.startsWith("Bearer")) token = token.slice(7);
     try {
       return await verify(token, SECRET_KEY);
     } catch (err) {
