@@ -8,7 +8,8 @@ import {
   ADD_RESTAURANT,
   VERIFY_TOKEN,
   ADD_MENU,
-  DELETE_MENU
+  DELETE_MENU,
+  ADD_DRIVER
 } from "../graphql/constants";
 
 export default {
@@ -160,6 +161,17 @@ export default {
         variables: { id }
       })
       return data.deleteMenu;
+    } catch (err) {
+      throw err;
+    }
+  },
+  handleDriverAdd: async ({ commit }, credentials) => {
+    try {
+      const { data } = await apollo.mutate({
+        mutation: ADD_DRIVER,
+        variables: credentials
+      })
+      return data.registerDriver;
     } catch (err) {
       throw err;
     }

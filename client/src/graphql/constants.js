@@ -103,3 +103,16 @@ export const DELETE_MENU = gql`
     deleteMenu(id: $id)
   }
 `;
+export const ADD_DRIVER = gql`
+  mutation addDriver(
+    $city:String!, $email:String!, $address:String!,
+    $phone:String!, $operateDays:String!,
+    $operateHrs:String!
+  ){
+    registerDriver(
+      city:$city, address:$address
+      phone:$phone, operateDays:$operateDays, email:$email,
+      operateHrs:$operateHrs
+    ){ id }
+  }
+`;

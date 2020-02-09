@@ -46,7 +46,7 @@
           class="nav-item"
           v-if="isAuthenticated()"
         >
-          <router-link class="nav-link" to="user-profile">
+          <router-link class="nav-link text-light" to="user-profile">
             {{isAuthenticated().fullname}}
           </router-link>
         </li>

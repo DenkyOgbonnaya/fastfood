@@ -4,6 +4,7 @@ const restaurantSchema = require("./restaurant");
 const menuSchema = require("./menu");
 const mealSchema = require("./meal");
 const mealExtraSchema = require("./mealExtra");
+const driverSchema = require("./driver");
 
 const linkSchema = gql`
   type Query {
@@ -22,5 +23,6 @@ module.exports = [
   restaurantSchema,
   menuSchema,
   mealSchema,
-  mealExtraSchema
+  mealExtraSchema,
+  driverSchema
 ];
