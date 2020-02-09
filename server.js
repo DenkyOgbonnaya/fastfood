@@ -14,7 +14,7 @@ const server = new ApolloServer({
   typeDefs: schemas,
   resolvers,
   context: async ({ req }) => {
-    const token = req.headers["x-token"];
+    const token = req.headers["authorization"];
     const currentUser  = await verifyToken(token).currentUser || '';
 
     return {
