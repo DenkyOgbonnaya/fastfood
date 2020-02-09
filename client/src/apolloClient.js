@@ -1,11 +1,11 @@
 import {
   ApolloClient,
   ApolloLink,
-  InMemoryCache,
-  HttpLink
+  InMemoryCache
 } from "apollo-boost";
+import { createUploadLink } from "apollo-upload-client";
 
-const httpLink = new HttpLink({ uri: "http://localhost:8000/graphql" });
+const uploadLink = createUploadLink({ uri: "http://localhost:8000/graphql" });
 
 const authLink = new ApolloLink((operation, forward) => {
   // Retrieve the authorization token from local storage.
@@ -23,7 +23,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink), // Chain it with the HttpLink
+  link: authLink.concat(uploadLink), // Chain it with the uploadlink
   cache: new InMemoryCache()
 });
 

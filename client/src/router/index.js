@@ -66,7 +66,7 @@ const routes = [
     component: OrderBill
   },
   {
-    path: '/partner-us',
+    path: '/become-a-partner',
     name: 'Partnership',
     component: Partnership
   },

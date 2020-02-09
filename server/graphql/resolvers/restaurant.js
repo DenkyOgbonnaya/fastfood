@@ -45,11 +45,13 @@ const restaurantResolver = {
     }
   },
   Mutation: {
-    registerRestaurant: combineResolvers(isAuthenticated, async (parent, args) => {
+    registerRestaurant: combineResolvers(isAuthenticated, async (parent, args, { currentUser }) => {
       try {
         // gets the cover photo url
+        console.log(args);
+        
         const coverPhoto = await uploadPhoto(args.coverPhoto, uploader);
-        const newRestaurant = { ...args, coverPhoto };
+        const newRestaurant = { ...args, coverPhoto, ownerId: currentUser.id };
 
         // add the new restaurant to db
         return await add(newRestaurant);

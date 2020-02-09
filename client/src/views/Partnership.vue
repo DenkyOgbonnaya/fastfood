@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
     <header>
-        <nav aria-label="breadcrumb">
+      <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><RouterLink class="text-danger" to="/">Home</RouterLink></li>
           <li class="breadcrumb-item active" aria-current="page">
-            Partner
+            Become a partner
           </li>
         </ol>
       </nav>
@@ -13,8 +13,9 @@
     <main>
       <h4>Partner With Us</h4>
       <p class="intro">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt
-            qui odio ducimus earum sunt ipsa illo, suscipit, numquam odit in
+        Become one of our partners to list your Restaurant as one of the
+        hundreds of restaurants registered on <strong>FastFood.</strong> You can
+        register with us as a delivery man, and get paid for every delivery.
       </p>
       <div class="card-container">
         <div class="partner-card">
@@ -23,25 +24,41 @@
           </figure>
           <h6>For Restaurant</h6>
           <p>
-            Lorem ipsum, dolor sit amet consectetur
+            Register your restaurant, and start selling on FastFood.
           </p>
-          <button class="btn btn-warning">Add Restaurant</button>
+          <button
+            @click="addRestaurant"
+            class="btn btn-danger"
+          >Add Restaurant</button>
         </div>
         <div class="partner-card">
           <figure>
-            <img src="~@/assets/images/img_1.svg" alt="parner" />
+            <img src="~@/assets/images/img_3.svg" alt="parner-driver" />
           </figure>
           <h6>For Driver</h6>
           <p>
-             Lorem ipsum, dolor sit amet consectetur
+            Becoming a Delivery man on FastFood is just a step away!.
           </p>
-          <button class="btn btn-warning">Add Vehicle</button>
+          <button class="btn btn-danger" @click="addDriver">Add Vehicle</button>
         </div>
       </div>
     </main>
   </div>
 </template>
 
+<script>
+export default {
+  name: "partnership",
+  methods: {
+    addRestaurant () {
+      this.$router.push("/add-restaurant");
+    },
+    addDriver () {
+      this.$router.push("/add-driver");
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 @import "@/assets/scss/index.scss";
 main {
@@ -52,7 +69,7 @@ main {
   margin-top: map-get($margins, top);
   .card-container {
     padding: 1%;
-    @include desktop(){
+    @include desktop() {
       display: flex;
       justify-content: center;
     }
@@ -72,10 +89,10 @@ main {
         align-self: center;
         justify-self: center;
       }
-      @include desktop(){
-      max-width: 250px;
-      padding: 3%;
-      margin-right: 15px;
+      @include desktop() {
+        max-width: 250px;
+        padding: 3%;
+        margin-right: 15px;
       }
       figure img {
         max-width: 50px;
@@ -84,20 +101,18 @@ main {
       }
     }
   }
-  & h4, .intro {
+  & h4,
+  .intro {
     text-align: center;
     padding: 1%;
     margin-bottom: 3%;
   }
   h4 {
-      font-weight: bold;
-  }
-  p {
-      color: grey;
+    font-weight: bold;
   }
   @include desktop() {
     .intro {
-         padding: 0 20%;
+      padding: 0 20%;
     }
   }
 }

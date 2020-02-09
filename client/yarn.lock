@@ -670,6 +670,13 @@
     js-levenshtein "^1.1.3"
     semver "^5.5.0"
 
+"@babel/runtime@^7.5.4":
+  version "7.8.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.4.tgz#d79f5a2040f7caa24d53e563aad49cbc05581308"
+  integrity sha512-neAp3zt80trRVBI1x0azq6c57aNBqYZH8KhMm3TaB7wEI5Q4A2SHfBHE8w9gOhI/lrqxtEbXZgQIrHP+wvSGwQ==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/runtime@^7.7.4":
   version "7.7.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.7.tgz#194769ca8d6d7790ec23605af9ee3e42a0aa79cf"
@@ -1767,7 +1774,7 @@ apollo-link-error@^1.0.3:
     apollo-link-http-common "^0.2.15"
     tslib "^1.9.3"
 
-apollo-link-http-common@^0.2.15:
+apollo-link-http-common@^0.2.14, apollo-link-http-common@^0.2.15:
   version "0.2.15"
   resolved "https://registry.yarnpkg.com/apollo-link-http-common/-/apollo-link-http-common-0.2.15.tgz#304e67705122bf69a9abaded4351b10bc5efd6d9"
   integrity sha512-+Heey4S2IPsPyTf8Ag3PugUupASJMW894iVps6hXbvwtg1aHSNMXUYO5VG7iRHkPzqpuzT4HMBanCTXPjtGzxg==
@@ -1785,7 +1792,7 @@ apollo-link-http@^1.3.1:
     apollo-link-http-common "^0.2.15"
     tslib "^1.9.3"
 
-apollo-link@^1.0.0, apollo-link@^1.0.6, apollo-link@^1.2.13:
+apollo-link@^1.0.0, apollo-link@^1.0.6, apollo-link@^1.2.12, apollo-link@^1.2.13:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.13.tgz#dff00fbf19dfcd90fddbc14b6a3f9a771acac6c4"
   integrity sha512-+iBMcYeevMm1JpYgwDEIDt/y0BB7VWyvlm/7x+TIPNLHCTCMgcEgDuW5kH86iQZWo0I7mNwQiTOz+/3ShPFmBw==
@@ -1794,6 +1801,16 @@ apollo-link@^1.0.0, apollo-link@^1.0.6, apollo-link@^1.2.13:
     ts-invariant "^0.4.0"
     tslib "^1.9.3"
     zen-observable-ts "^0.8.20"
+
+apollo-upload-client@^12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/apollo-upload-client/-/apollo-upload-client-12.1.0.tgz#7af32196feb1a72e4c4953887bb7c50eee7e06e0"
+  integrity sha512-pAWYDMU9aFZnPvj0g7+FPRCHcslBPwUpnFxSUWiPDJAGYPXzE5C5DKcvRSQMMyQ09akqU6wZsyVk8zhL7GFC8Q==
+  dependencies:
+    "@babel/runtime" "^7.5.4"
+    apollo-link "^1.2.12"
+    apollo-link-http-common "^0.2.14"
+    extract-files "^5.0.1"
 
 apollo-utilities@1.3.3, apollo-utilities@^1.3.0, apollo-utilities@^1.3.3:
   version "1.3.3"
@@ -4306,6 +4323,11 @@ extglob@^2.0.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+extract-files@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-5.0.1.tgz#c9492a8410be643e260a376f0151361993d5f659"
+  integrity sha512-qRW6y9eKF0VbCyOoOEtFhzJ3uykAw8GKwQVXyAIqwocyEWW4m+v+evec34RwtUkkxxHh7NKBLJ6AnXM8W4dH5w==
 
 extract-from-css@^0.4.4:
   version "0.4.4"
@@ -7205,6 +7227,11 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
+
+noty@^3.1.0:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/noty/-/noty-3.1.4.tgz#f9eaac9df7883921b270ec6f2869e9aeedd8071b"
+  integrity sha512-HKOH392eBygTojC6fXVBOFxTqebjnn/e7/AS69zlWSH3Tn6+0RzfT3aDCGx2PY6Ed3xKBPhtz+xeHAHQGEh68Q==
 
 npm-run-path@^2.0.0:
   version "2.0.2"
@@ -10238,6 +10265,13 @@ vue@^2.6.10:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
+
+vuejs-noty@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/vuejs-noty/-/vuejs-noty-0.1.3.tgz#c665b70c9cfdf7c32f0107a734ecd2b86674af78"
+  integrity sha512-qHdEpq3IQMg3Upf6UAQrcEtRGNZfH3gQd1KLJYQE52rmYaNp79ZAj8F7kP2xDKpSBGBERvCUAy7txNiodRxAYg==
+  dependencies:
+    noty "^3.1.0"
 
 vuex@^3.1.2:
   version "3.1.2"

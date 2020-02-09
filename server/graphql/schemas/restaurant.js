@@ -19,7 +19,7 @@ const restaurantSchema = gql`
       website: String!
       description: String!
       coverPhoto: Upload!
-      ownerId: ID!
+      ownerId: ID
     ): Restaurant,
     editRestaurant(
       id: Int!,

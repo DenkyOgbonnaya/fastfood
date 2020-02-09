@@ -5,9 +5,12 @@
       Add the categories of edibles you offer. eg Rice, Beans, swallow, soup,
       drinks, water etc
     </p>
-    <form @submit.prevent="addCategory">
+    <form @submit.prevent="addMenu">
+      <div v-if="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
       <div class="form-group">
-        <label for="name">Category name*</label>
+        <label for="name">Category(menu) name*</label>
         <input
           type="text"
           name="name"
@@ -21,48 +24,104 @@
         <label for="cover">Add a cover photo</label>
         <input
           type="file"
-          name="cover"
+          name="coverPhoto"
           class="form-control"
+          accept="image/*"
+          @change="handleFileChange"
+          required
         />
       </div>
-      <button class="btn btn-warning">Add</button>
-    </form>
-      <ul v-if="categories.length">
-        <li
-          v-for="(category, index) in categories"
-          :key="index"
+      <button class="btn btn-warning text-ligth" :disabled="isLoading">
+        <span v-if="!isLoading">Add</span>
+        <div
+          v-else
+          class="spinner-border text-light  spinner-border-sm"
+          role="status"
         >
-          <span class="badge badge-primary">{{category.name}}</span>
-          <span @click="removeCategory(index)">x</span>
-        </li>
+          <span class="sr-only">loading...</span>
+        </div>
+      </button>
+    </form>
+    <ul v-if="menus.length">
+      <li v-for="menu in menus" :key="menu.id">
+        <span class="badge badge-primary">{{ menu.name }}</span>
+        <span @click="removeMenu(menu.id)">x</span>
+      </li>
     </ul>
-    <button class="btn btn-danger btn-finish">Finish</button>
+    <button
+      class="btn btn-danger"
+      @click="closeModal"
+    >Finish</button>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: 'mealExtraForm',
+  name: "addMenu",
   data () {
     return {
-      categories: [],
-      name: '',
-      coverPhoto: ''
-    }
+      menus: [],
+      name: "",
+      coverPhoto: null,
+      isLoading: false,
+      errorMessage: ""
+    };
+  },
+  props: {
+    restaurantId: String
   },
   methods: {
-    addCategory () {
-      let category = {
+    ...mapActions(["handleMenuAdd", "handleMenuRemove"]),
+    async addMenu () {
+      this.toggleIsLoading();
+      this.setErrorMessage(null);
+
+      let menu = {
         name: this.name,
-        coverPhoto: this.coverPhoto
+        photo: this.coverPhoto,
+        restaurantId: this.restaurantId
+      };
+      try {
+        const { id } = await this.handleMenuAdd(menu);
+        if (id) {
+          this.menus.push({ ...menu, id });
+          this.toggleIsLoading();
+          this.$noty.success("Menu added!")
+        }
+      } catch (err) {
+        this.setErrorMessage(err.message);
+        this.toggleIsLoading();
       }
-      this.categories.push(category)
     },
-    removeCategory (index) {
-      this.categories = this.categories.filter((category, catIndex) => catIndex !== index)
+    handleFileChange ({ target }) {
+      this.coverPhoto = target.files[0];
+    },
+    async removeMenu (id) {
+      this.menus = this.menus.filter((menu) => menu.id !== id);
+      await this.handleMenuRemove(id)
+      this.$noty.success("Menu removed!");
+    },
+    toggleIsLoading () {
+      this.isLoading = !this.isLoading;
+    },
+    setErrorMessage (msg) {
+      this.errorMessage = msg;
+      this.scrollToTop();
+    },
+    scrollToTop () {
+      const el = this.$el.getElementsByClassName('top')[0];
+
+      if (el) {
+        el.scrollIntoView();
+      }
+    },
+    closeModal () {
+      this.$emit("finish");
+      this.$noty.success("Restaurant registered!, wait for confirmation");
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

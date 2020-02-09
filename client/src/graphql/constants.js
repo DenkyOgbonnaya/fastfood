@@ -76,12 +76,12 @@ export const SEARCH_RESTAURANTS = gql`
 export const ADD_RESTAURANT = gql`
   mutation addRestaurant(
     $name:String!, $city:String!, $email:String!, $address:String!,
-    $phone:String!, $website:String!, $daysOpen:String!, $delivTime:String
+    $phone:String!, $website:String!, $daysOpen:String!, $delivTime:String!,
     $hrsOpen:String!, $description:String!, $coverPhoto: Upload!
   ){
     registerRestaurant(
-      name:$name, city:$city, address:$address, delivTime:$delivTime
-      phone:$phone, website:$website, daysOpen:$daysOpen, email:$email
+      name:$name, city:$city, address:$address, delivTime:$delivTime,
+      phone:$phone, website:$website, daysOpen:$daysOpen, email:$email,
       hrsOpen:$hrsOpen, description:$description, coverPhoto:$coverPhoto
     ){ id }
   }
@@ -89,5 +89,17 @@ export const ADD_RESTAURANT = gql`
 export const VERIFY_TOKEN = gql`
   query verifyToken($token: String!){
     verifyToken(token: $token)
+  }
+`;
+export const ADD_MENU = gql`
+  mutation addMenu($name: String!, $photo: Upload!, $restaurantId: ID!){
+    addMenu(name: $name, photo: $photo, restaurantId: $restaurantId){
+      id
+    }
+  }
+`;
+export const DELETE_MENU = gql`
+  mutation deleteMenu($id: ID!){
+    deleteMenu(id: $id)
   }
 `;

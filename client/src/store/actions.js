@@ -6,7 +6,9 @@ import {
   GET_RESTAURANT,
   SEARCH_RESTAURANTS,
   ADD_RESTAURANT,
-  VERIFY_TOKEN
+  VERIFY_TOKEN,
+  ADD_MENU,
+  DELETE_MENU
 } from "../graphql/constants";
 
 export default {
@@ -129,15 +131,35 @@ export default {
       console.log(err);
     }
   },
-  handleRestaurantsAdd: async ({ commit }, credentials) => {
-    console.log(credentials);
+  handleRestaurantAdd: async ({ commit }, credentials) => {
     try {
       const { data } = await apollo.mutate({
         mutation: ADD_RESTAURANT,
         variables: credentials
       })
-      console.log(data)
-      return data.registerRestaurant.id;
+      return data.registerRestaurant;
+    } catch (err) {
+      throw err;
+    }
+  },
+  handleMenuAdd: async ({ commit }, credentials) => {
+    try {
+      const { data } = await apollo.mutate({
+        mutation: ADD_MENU,
+        variables: credentials
+      })
+      return data.addMenu;
+    } catch (err) {
+      throw err;
+    }
+  },
+  handleMenuRemove: async ({ commit }, id) => {
+    try {
+      const { data } = await apollo.mutate({
+        mutation: DELETE_MENU,
+        variables: { id }
+      })
+      return data.deleteMenu;
     } catch (err) {
       throw err;
     }
