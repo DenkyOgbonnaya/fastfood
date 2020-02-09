@@ -4,7 +4,9 @@ import {
   LOGIN_MUTATION,
   GET_RESTAURANTS,
   GET_RESTAURANT,
-  SEARCH_RESTAURANTS
+  SEARCH_RESTAURANTS,
+  ADD_RESTAURANT,
+  VERIFY_TOKEN
 } from "../graphql/constants";
 
 export default {
@@ -114,6 +116,30 @@ export default {
       commit("addRestaurants", data.search);
     } catch (err) {
       console.log(err);
+    }
+  },
+  verifyToken: async (context, token) => {
+    try {
+      const { data } = await apollo.query({
+        query: VERIFY_TOKEN,
+        variables: { token }
+      })
+      return data.verifyToken;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  handleRestaurantsAdd: async ({ commit }, credentials) => {
+    console.log(credentials);
+    try {
+      const { data } = await apollo.mutate({
+        mutation: ADD_RESTAURANT,
+        variables: credentials
+      })
+      console.log(data)
+      return data.registerRestaurant.id;
+    } catch (err) {
+      throw err;
     }
   }
 };

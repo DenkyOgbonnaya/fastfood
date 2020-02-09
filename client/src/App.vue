@@ -17,6 +17,7 @@ import TheFooter from "@/components/TheFooter";
 import AppModal from "@/components/AppModal";
 import AuthForms from "@/components/authForms/AuthForms";
 import { mapState, mapActions } from "vuex";
+import { decode } from "jsonwebtoken";
 
 export default {
   name: "App",
@@ -26,10 +27,27 @@ export default {
     AppModal,
     AuthForms
   },
+  created () {
+    this.verifyAuthToken();
+  },
   methods: {
-    ...mapActions(["handleAuthModalToggle"]),
+    ...mapActions([
+      "handleAuthModalToggle",
+      "verifyToken",
+      "handleSetCurrUser"
+    ]),
     closeAuthModal () {
       this.handleAuthModalToggle();
+    },
+    async verifyAuthToken () {
+      const token = localStorage.token;
+      if (token) {
+        const isValidToken = await this.verifyToken(token);
+        if (isValidToken) {
+          const { currentUser } = decode(token);
+          this.handleSetCurrUser(currentUser);
+        }
+      }
     }
   },
   computed: {
