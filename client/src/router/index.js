@@ -140,9 +140,10 @@ router.beforeEach((to, from, next) => {
     const { isAuthenticated } = store.getters;
     if (!isAuthenticated) {
       next({
-        path: "/login",
+        path: "/",
         params: { nextUrl: to.fullPath }
       });
+      store.dispatch("handleAuthModalToggle");
       return;
     }
     next();
