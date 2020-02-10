@@ -6,7 +6,7 @@ const {
 } = require("apollo-server-express");
 require("dotenv").config();
 
-const { signup, emailExist } = require("./user-service")();
+const { signup, emailExist, edit } = require("./user-service")();
 
 const userController = () => {
   const { SECRET_KEY } = process.env;
@@ -53,6 +53,14 @@ const userController = () => {
       throw err;
     }
   };
+  const editProfile = async (id, credentials) => {
+    try {
+      const user = await edit(id, credentials);
+      return generateJwt(user, SECRET_KEY, "24h");
+    } catch (err) {
+      throw err;
+    }
+  }
   // returns a jwt
   function generateJwt(user, key, expiresIn) {
     return sign(
@@ -73,7 +81,8 @@ const userController = () => {
   return {
     createUser,
     loginUser,
-    emailExist
+    emailExist,
+    editProfile
   };
 };
 

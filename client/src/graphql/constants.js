@@ -116,3 +116,10 @@ export const ADD_DRIVER = gql`
     ){ id }
   }
 `;
+export const EDIT_PROFILE = gql`
+  mutation editProfile($fullname:String!, $location:String!, $phone:String!){
+    editProfile(fullname:$fullname, location:$location, phone:$phone){ 
+      token
+    }
+  }
+`;

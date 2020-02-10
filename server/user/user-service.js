@@ -19,10 +19,25 @@ const usertService = () => {
       throw err;
     }
   };
+  const edit = async (id, credentials) => {
+    try {
+      const user = await User.findOne({
+        where: {
+          id
+        }
+      });
+      if (user) {
+        return await user.update(credentials);
+      } else throw new Error("No such user found")
+    } catch (err) {
+      throw err;
+    }
+  };
 
   return {
     signup,
-    emailExist
+    emailExist,
+    edit
   };
 };
 module.exports = usertService;

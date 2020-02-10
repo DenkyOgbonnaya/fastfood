@@ -1,4 +1,10 @@
-const { createUser, loginUser } = require("../../user").userController();
+const { combineResolvers } = require("graphql-resolvers");
+const { isAuthenticated } = require("./authorization");
+const {
+  createUser,
+  loginUser,
+  editProfile
+} = require("../../user").userController();
 const { verifyToken } = require("../../utils");
 
 const userResolver = {
@@ -32,7 +38,18 @@ const userResolver = {
       } catch (err) {
         throw err;
       }
-    }
+    },
+    editProfile: combineResolvers(
+      isAuthenticated,
+      async (parent, args, { currentUser }) => {
+        try {
+          const token = await editProfile(currentUser.id, args);
+          return { token };
+        } catch (err) {
+          throw err;
+        }
+      }
+    )
   }
 };
 

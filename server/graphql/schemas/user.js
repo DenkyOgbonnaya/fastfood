@@ -8,7 +8,8 @@ const userSchema = gql`
   },
   extend type Mutation {
     signup(fullname: String!, email: String!, password: String!): Token,
-    login(email: String!, password: String!): Token!
+    login(email: String!, password: String!): Token!,
+    editProfile(fullname: String, location: String, phone: String): Token!
   },
 
   type User {

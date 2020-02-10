@@ -9,7 +9,8 @@ import {
   VERIFY_TOKEN,
   ADD_MENU,
   DELETE_MENU,
-  ADD_DRIVER
+  ADD_DRIVER,
+  EDIT_PROFILE
 } from "../graphql/constants";
 
 export default {
@@ -172,6 +173,17 @@ export default {
         variables: credentials
       })
       return data.registerDriver;
+    } catch (err) {
+      throw err;
+    }
+  },
+  handleProfileSave: async ({ commit }, credentials) => {
+    try {
+      const { data } = await apollo.mutate({
+        mutation: EDIT_PROFILE,
+        variables: credentials
+      })
+      return data.editProfile;
     } catch (err) {
       throw err;
     }
