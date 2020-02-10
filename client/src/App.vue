@@ -46,6 +46,8 @@ export default {
         if (isValidToken) {
           const { currentUser } = decode(token);
           this.handleSetCurrUser(currentUser);
+        } else {
+          localStorage.removeItem("token");
         }
       }
     }
