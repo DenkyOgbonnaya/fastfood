@@ -75,13 +75,30 @@ const restaurantService = () => {
       throw err;
     }
   };
+  const getUsers = async (userId, { limit = 4, page = 1}) => {
+    page = Number(page);
+    limit = Number(limit);
+
+    const offset = page * limit - limit;
+    try {
+      return await Restaurant.findAndCountAll({
+        where: {ownerId: userId},
+        order: [["name", "ASC"]],
+        offset,
+        limit
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
   return {
     add,
     getAll,
     getSingle,
     editOne,
     deleteOne,
-    searchRestaurants
+    searchRestaurants,
+    getUsers
   };
 };
 

@@ -4,21 +4,28 @@
       <h1>Restaurant Details</h1>
     </header>
     <main class="container">
-      <section class="restaurant-details">
+      <section class="restaurant-details" v-if="restaurant">
+        <span @click="toggleIsEditableProfile">
+          <font-awesome-icon icon="edit" style="color: grey, max-width:10px" />
+          View Menu
+        </span>
         <section class="restaurant-info">
-          <img src="~@/assets/images/restaura.jpeg" alt="restuarant view" />
+          <img
+            src="~@/assets/images/restaurant_cover.jpg"
+            alt="restuarant view"
+          />
           <div class="details">
             <div class="address">
-              <img src="~@/assets/images/img_1.svg" alt="" />
+              <img :src="restaurant.coverPhoto" alt="" />
               <div>
-                <h6>Chicken republic</h6>
-                <small class="text-muted">123 lagos</small>
+                <h6>{{ restaurant.name || "" }}</h6>
+                <small class="text-muted">{{ restaurant.address }}</small>
               </div>
             </div>
             <div class="owner">
-              <img src="~@/assets/images/banner-1.jpg" alt="" />
+              <img src="~@/assets/images/defavatar.png" alt="" />
               <div>
-                <h6>John Doe</h6>
+                <h6>{{ restaurant.owner.fullname }}</h6>
                 <small class="text-muted">owner</small>
               </div>
             </div>
@@ -31,37 +38,51 @@
               <tbody>
                 <tr>
                   <td class="heading">Name</td>
-                  <td><small class="text-muted">John Doe </small></td>
-                  <td class="heading">Operating hours</td>
-                  <td><small class="text-muted">2am-4pm</small></td>
+                  <td>
+                    <small class="text-muted"
+                      >{{ restaurant.name || "" }}
+                    </small>
+                  </td>
+                  <td class="heading">Operating days</td>
+                  <td>
+                    <small class="text-muted">{{ restaurant.daysOpen }}</small>
+                  </td>
                 </tr>
                 <tr>
                   <td class="heading">Owner</td>
                   <td class="data">
-                    <small class="text-muted">John Doe </small>
+                    <small class="text-muted"
+                      >{{ restaurant.owner.fullname }}
+                    </small>
                   </td>
-                  <td class="heading">status</td>
-                  <td class="data"><small class="text-muted">online</small></td>
+                  <td class="heading">Operating hours</td>
+                  <td class="data">
+                    <small class="text-muted">{{ restaurant.hrsOpen }}</small>
+                  </td>
                 </tr>
                 <tr>
                   <td class="heading">Phone</td>
                   <td class="data">
-                    <small class="text-muted">+234 7069797</small>
+                    <small class="text-muted">{{
+                      restaurant.phone || "-"
+                    }}</small>
                   </td>
-                  <td class="heading">Country</td>
+                  <td class="heading">Website</td>
                   <td class="data">
-                    <small class="text-muted">Nigeria </small>
+                    <small class="text-muted"
+                      >{{ restaurant.websit || "-" }}
+                    </small>
                   </td>
                 </tr>
 
                 <tr>
-                  <td class="heading">email</td>
+                  <td class="heading">Email</td>
                   <td class="data">
-                    <small class="text-muted">Denkyogb@gmai.com</small>
+                    <small class="text-muted">{{ restaurant.email }}</small>
                   </td>
-                  <td class="heading">address</td>
+                  <td class="heading">Address</td>
                   <td class="data">
-                    <small class="text-muted">23 hicon street </small>
+                    <small class="text-muted">{{ restaurant.address }} </small>
                   </td>
                 </tr>
               </tbody>
@@ -70,12 +91,7 @@
         </section>
         <section class="restaurant-description">
           <h4>Description</h4>
-          <p>
-            FastFood is a network of restaurants and bars in your city, making
-            meals and drinks easy, assessible for everyone. It is not just about
-            bringing great meals from your favorite restaurants directly to you,
-            it is about making a connection
-          </p>
+          <p>{{ restaurant.description }}</p>
         </section>
       </section>
       <aside><PopularRestaurants /></aside>
@@ -84,13 +100,25 @@
 </template>
 
 <script>
-import PopularRestaurants from '@/components/restaurants/PopularRestaurants'
+import PopularRestaurants from "@/components/restaurants/PopularRestaurants";
+import { mapActions, mapState } from "vuex";
+
 export default {
-  name: 'RestaurantDetails',
+  name: "restaurantDetails",
   components: {
     PopularRestaurants
+  },
+  mounted () {
+    const restaurantName = this.$route.params.name;
+    this.handleGetRestaurant(restaurantName);
+  },
+  computed: {
+    ...mapState(["restaurant"])
+  },
+  methods: {
+    ...mapActions(["handleGetRestaurant"])
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -103,6 +131,9 @@ export default {
   padding: 20px;
   main {
     margin-top: 5%;
+    span {
+      color: $orange-color;
+    };
     .restaurant-info {
       margin-bottom: 3%;
       img {

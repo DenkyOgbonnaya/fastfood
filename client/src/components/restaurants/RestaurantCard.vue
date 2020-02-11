@@ -1,5 +1,8 @@
 <template>
-  <div class="card-container">
+  <div
+    class="card-container"
+    @click="viewDetails(restaurant.name)"
+  >
     <div
       class="card_body"
       :style="{backgroundImage:`url(${restaurant.coverPhoto})`}"
@@ -11,7 +14,7 @@
         <span>{{restaurant.city}}</span>
         <button
           class="btn btn-outline-danger btn-sm"
-          @click="viewMenu(restaurant.name)"
+          @click="viewMenu(restaurant.name, $event)"
         >
           Menu
         </button>
@@ -34,7 +37,11 @@ export default {
     restaurant: Object
   },
   methods: {
-    viewMenu (restaurantName) {
+    viewMenu (restaurantName, event) {
+      event.stopPropagation();
+      this.$router.push(`/restaurants/${restaurantName}/menu`);
+    },
+    viewDetails (restaurantName) {
       this.$router.push(`/restaurants/${restaurantName}`);
     }
   }
@@ -43,8 +50,11 @@ export default {
 
 <style lang="css" scoped>
   .card-container {
-      border: 1px solid #ccc;
-      margin-bottom: 15px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+  }
+  .card-container:hover {
+    cursor: pointer;
   }
   .card_body {
     height: 200px;

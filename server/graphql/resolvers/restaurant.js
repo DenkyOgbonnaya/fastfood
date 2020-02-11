@@ -6,11 +6,13 @@ const {
   add,
   deleteOne,
   editOne,
-  searchRestaurants
+  searchRestaurants,
+  getUsers
 } = require("../../restaurant").restaurantService();
 const { getRestaurantMenu } = require("../../menu/menu-service")();
 const uploader = require("../../configs/cloudinary-config");
 const { uploadPhoto } = require("../../utils");
+const { getUser } = require("../../user").userController();
 
 const restaurantResolver = {
   Query: {
@@ -42,7 +44,20 @@ const restaurantResolver = {
       } catch (err) {
         throw new Error(err.message);
       }
-    }
+    },
+    userRestaurants: async (parent, args, { currentUser }) => {
+      // get all restaurants that belongs to currentUser
+      try {
+        const { rows, count } = await getUsers(currentUser.id, args);
+
+        return {
+          rows,
+          count
+        };
+      } catch (err) {
+        throw err;
+      }
+    },
   },
   Mutation: {
     registerRestaurant: combineResolvers(isAuthenticated, async (parent, args, { currentUser }) => {
@@ -88,6 +103,14 @@ const restaurantResolver = {
       // get menu items with restaurantId parent.id
       try {
         return await getRestaurantMenu(id);
+      } catch (err) {
+        throw err;
+      }
+    },
+    owner: async ({ id }) => {
+      // get user  with restaurantId parent.id
+      try {
+        return await getUser(id);
       } catch (err) {
         throw err;
       }

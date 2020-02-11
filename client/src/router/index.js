@@ -16,6 +16,7 @@ import OrderHistory from "../views/OrderHistory";
 import RestaurantMeals from "../views/RestaurantMeals";
 import Restaurant from "../views/Restaurant";
 import OrderDetails from "../views/OrderDetails";
+import MyRestaurants from "@/components/restaurants/MyRestaurants";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -33,13 +34,13 @@ const routes = [
   },
   {
     path: "/restaurants/:name",
-    name: "restaurant",
-    component: Restaurant
-  },
-  {
-    path: "/restaurant-details",
     name: "RestaurantDetails",
     component: RestaurantDetails
+  },
+  {
+    path: "/restaurants/:name/menu",
+    name: "restaurant",
+    component: Restaurant
   },
   {
     path: "/meals",
@@ -122,9 +123,17 @@ const routes = [
         component: RestaurantMeals,
         name: "restaurantMeals"
       },
-      { path: "*", redirect: "/" }
+      {
+        path: "/my-restaurants",
+        component: MyRestaurants,
+        name: "myRestaurants",
+        meta: {
+          requiresAuth: true
+        }
+      }
     ]
-  }
+  },
+  { path: "*", redirect: "/" }
 ];
 
 const router = new VueRouter({

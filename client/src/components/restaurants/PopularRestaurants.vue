@@ -1,18 +1,18 @@
 <template>
-    <article v-if="popularRestaurants.length">
+    <article v-if="getRestaurants.length">
       <header>
         <h5>Popular Restaurants</h5>
       </header>
         <section
-          v-for="restaurant in popularRestaurants"
+          v-for="restaurant in getRestaurants"
           :key="restaurant._id"
         >
            <figure class="restaurant-img">
-               <img src="~@/assets/images/img_1.svg" alt="restaurant">
+               <img :src="restaurant.coverPhoto" alt="restaurant">
            </figure>
            <div class="details">
                <h6>{{restaurant.name}}</h6>
-               <small>{{restaurant.location}}</small>
+               <small>{{restaurant.address}}</small>
                <div class="rating text-muted">Rating: <span>4.5</span></div>
            </div>
         </section>
@@ -20,19 +20,22 @@
 </template>
 
 <script>
-const popularRestaurants = [
-  { _id: '1', name: 'Chicken republic', location: 'water works road' },
-  { _id: '2', name: 'Chicken republic', location: 'water works road' },
-  { _id: '3', name: 'Chicken republic', location: 'water works road' },
-  { _id: '4', name: 'Chicken republic', location: 'water works road' },
-  { _id: '5', name: 'Chicken republic', location: 'water works road' }
-]
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  name: 'PopularRestaurants',
-  data () {
-    return {
-      popularRestaurants
-    }
+  name: 'popularRestaurants',
+  mounted () {
+    const paginationOptions = {
+      page: 1,
+      limit: 4
+    };
+    this.handleGetRestaurants(paginationOptions);
+  },
+  computed: {
+    ...mapGetters(["getRestaurants"])
+  },
+  methods: {
+    ...mapActions(["handleGetRestaurants"])
   }
 }
 </script>
@@ -51,10 +54,13 @@ export default {
       border: 1px solid #ccc;
       padding: 5px;
       margin-bottom: 5px;
+      height: 90px;
       .restaurant-img {
+        height: 100%;
         img {
           width:80px;
-          height: 50px;
+          height: 100%;
+          margin-right: 5px;
         }
       }
       .details .rating span {

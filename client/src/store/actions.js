@@ -10,7 +10,8 @@ import {
   ADD_MENU,
   DELETE_MENU,
   ADD_DRIVER,
-  EDIT_PROFILE
+  EDIT_PROFILE,
+  GET_USER_RESTAURANTS
 } from "../graphql/constants";
 
 export default {
@@ -186,6 +187,16 @@ export default {
       return data.editProfile;
     } catch (err) {
       throw err;
+    }
+  },
+  handleGetUserRestaurants: async ({ commit }) => {
+    try {
+      const { data } = await apollo.query({
+        query: GET_USER_RESTAURANTS
+      });
+      commit("addRestaurant", data.userRestaurants);
+    } catch (err) {
+      console.log(err);
     }
   }
 };

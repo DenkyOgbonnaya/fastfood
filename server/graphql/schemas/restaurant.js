@@ -5,6 +5,7 @@ const restaurantSchema = gql`
     restaurant(name: String!): Restaurant
     restaurants(page: Int, limit: Int, order: String): RestaurantsResult!
     search(search: String!): RestaurantsResult!
+    userRestaurants(page: Int, limit: Int) : RestaurantsResult!
   },
   extend type Mutation {
     registerRestaurant(
@@ -50,6 +51,7 @@ const restaurantSchema = gql`
     description: String!
     coverPhoto: String!
     ownerId: ID!
+    owner: User!
     menu: [Menu!]
   },
   type RestaurantsResult {

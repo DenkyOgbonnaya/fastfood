@@ -28,16 +28,27 @@ const usertService = () => {
       });
       if (user) {
         return await user.update(credentials);
-      } else throw new Error("No such user found")
+      } else throw new Error("No such user found");
     } catch (err) {
       throw err;
     }
   };
-
+  const getOne = async id => {
+    try {
+      return await User.findOne({
+        where: {
+          id
+        }
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
   return {
     signup,
     emailExist,
-    edit
+    edit,
+    getOne
   };
 };
 module.exports = usertService;

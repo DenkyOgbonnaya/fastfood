@@ -41,6 +41,13 @@ export const GET_RESTAURANT = gql`
       address
       description
       coverPhoto
+      email
+      hrsOpen
+      daysOpen
+      owner {
+        fullname
+        email
+      }
       menu {
         id
         name
@@ -120,6 +127,20 @@ export const EDIT_PROFILE = gql`
   mutation editProfile($fullname:String!, $location:String!, $phone:String!){
     editProfile(fullname:$fullname, location:$location, phone:$phone){ 
       token
+    }
+  }
+`;
+export const GET_USER_RESTAURANTS = gql`
+  query getUserRestaurants($page: Int, $limit: Int) {
+    userRestaurants(page: $page, limit: $limit) {
+      rows {
+        id
+        name
+        city
+        delivTime
+        coverPhoto
+      }
+      count
     }
   }
 `;
