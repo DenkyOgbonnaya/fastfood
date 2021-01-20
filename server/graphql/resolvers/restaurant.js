@@ -16,10 +16,10 @@ const { getUser } = require("../../user").userController();
 
 const restaurantResolver = {
   Query: {
-    restaurant: async (parent, { name }) => {
+    restaurant: async (parent, { id }) => {
       // get restaurant with given id
       try {
-        return await getSingle(name);
+        return await getSingle(id);
       } catch (err) {
         throw err;
       }

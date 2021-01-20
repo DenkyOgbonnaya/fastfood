@@ -33,12 +33,12 @@ const routes = [
     component: HowToOrder
   },
   {
-    path: "/restaurants/:name",
+    path: "/restaurants/:id",
     name: "RestaurantDetails",
     component: RestaurantDetails
   },
   {
-    path: "/restaurants/:name/menu",
+    path: "/restaurants/:id/menu",
     name: "restaurant",
     component: Restaurant
   },

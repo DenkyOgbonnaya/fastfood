@@ -1,10 +1,22 @@
-const { Meal } = require("../models");
+const { Meal, Extra } = require("../models");
 const { UserInputError } = require("apollo-server-express");
 
 const mealService = () => {
   const addMeal = async meal => {
     try {
-      return await Meal.create(meal);
+      const newMeal = await Meal.create(meal);
+      let extras = []
+      if(meal.extras){
+        extras = JSON.parse(meal.extras)
+      }
+      for(let extra of extras){
+        await Extra.create({
+          name: extra.name,
+          price: extra.price,
+          mealId: newMeal.id
+        })
+      }
+      return newMeal
     } catch (err) {
       throw err;
     }

@@ -44,8 +44,8 @@ export default {
     ShoppingCart
   },
   mounted () {
-    const restaurantName = this.$route.params.name;
-    this.handleGetRestaurant(restaurantName);
+    const restaurantId = this.$route.params.id;
+    this.handleGetRestaurant(restaurantId);
   },
   methods: {
     ...mapActions(["handleGetRestaurant"]),

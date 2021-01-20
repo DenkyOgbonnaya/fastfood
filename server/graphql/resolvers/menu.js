@@ -4,7 +4,8 @@ const {
   addMenu,
   getMenu,
   deleteMenu,
-  editMenu
+  editMenu,
+  getRestaurantMenu
 } = require("../../menu/menu-service")();
 const uploader = require("../../configs/cloudinary-config");
 const { uploadPhoto } = require("../../utils");
@@ -19,7 +20,16 @@ const menuResolver = {
       } catch (err) {
         throw err;
       }
-    }
+    },
+    menus: async (parent, {restaurantId} ) => {
+      // get all menus in a restaurant
+      try {
+        return await getRestaurantMenu(restaurantId);
+
+      } catch (err) {
+        throw err;
+      }
+    },
   },
   Mutation: {
     addMenu: combineResolvers(isAuthenticated, async (parent, args) => {

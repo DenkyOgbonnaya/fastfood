@@ -109,8 +109,8 @@ export default {
     PopularRestaurants
   },
   mounted () {
-    const restaurantName = this.$route.params.name;
-    this.handleGetRestaurant(restaurantName);
+    const restaurantId = this.$route.params.id;
+    this.handleGetRestaurant(restaurantId);
   },
   computed: {
     ...mapState(["restaurant"])

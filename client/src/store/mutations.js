@@ -55,5 +55,8 @@ export default {
       restaurants: rows,
       restaurantsCount: count
     }
+  },
+  addMenus: (state, menus) => {
+    state.menus = menus;
   }
 };

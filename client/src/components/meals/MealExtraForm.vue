@@ -44,12 +44,17 @@ export default {
     addExtra () {
       let extraMeal = {
         name: this.name,
-        price: this.price
+        price: Number(this.price)
       }
       this.extraMeals.push(extraMeal)
+      this.$emit("passExtras", extraMeal)
+
+      this.price = '';
+      this.name = '';
     },
     removeExtra (index) {
       this.extraMeals = this.extraMeals.filter((meal, mealIndex) => mealIndex !== index)
+      this.$emit("removeExtras", index)
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div
     class="card-container"
-    @click="viewDetails(restaurant.name)"
+    @click="viewDetails(restaurant.id)"
   >
     <div
       class="card_body"
@@ -14,7 +14,7 @@
         <span>{{restaurant.city}}</span>
         <button
           class="btn btn-outline-danger btn-sm"
-          @click="viewMenu(restaurant.name, $event)"
+          @click="viewMenu(restaurant.id, $event)"
         >
           Menu
         </button>
@@ -37,12 +37,12 @@ export default {
     restaurant: Object
   },
   methods: {
-    viewMenu (restaurantName, event) {
+    viewMenu (restaurantId, event) {
       event.stopPropagation();
-      this.$router.push(`/restaurants/${restaurantName}/menu`);
+      this.$router.push(`/restaurants/${restaurantId}/menu`);
     },
-    viewDetails (restaurantName) {
-      this.$router.push(`/restaurants/${restaurantName}`);
+    viewDetails (restaurantId) {
+      this.$router.push(`/restaurants/${restaurantId}`);
     }
   }
 }

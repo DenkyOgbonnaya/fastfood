@@ -2,7 +2,7 @@ const { gql } = require("apollo-server-express");
 
 const restaurantSchema = gql`
   extend type Query {
-    restaurant(name: String!): Restaurant
+    restaurant(id: ID!): Restaurant
     restaurants(page: Int, limit: Int, order: String): RestaurantsResult!
     search(search: String!): RestaurantsResult!
     userRestaurants(page: Int, limit: Int) : RestaurantsResult!

@@ -9,18 +9,26 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
         notEmpty: true
       }
     },
     menuId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notEmpty: true
       }
+    },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    restaurant: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     }
   }, {});
   Meal.associate = function(models) {

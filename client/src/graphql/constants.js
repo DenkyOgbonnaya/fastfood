@@ -34,8 +34,8 @@ export const GET_RESTAURANTS = gql`
   }
 `;
 export const GET_RESTAURANT = gql`
-  query getRestaurant($name: String!) {
-    restaurant(name: $name) {
+  query getRestaurant($id: ID!) {
+    restaurant(id: $id) {
       id
       name
       address
@@ -141,6 +141,36 @@ export const GET_USER_RESTAURANTS = gql`
         coverPhoto
       }
       count
+    }
+  }
+`;
+export const ADD_MEAL = gql`
+  mutation addMeal(
+    $category:String!, 
+    $name:String!,
+    $price:Int!,
+    $extras:String!,
+    $photo: Upload!,
+    $restaurant: ID!,
+    $menu: ID!
+  ){
+    addMeal(
+      name:$name,
+      category:$category,
+      price:$price,
+      extras:$extras,
+      photo:$photo,
+      restaurant: $restaurant,
+      menuId: $menu
+    ){ id }
+  }
+`;
+
+export const GET_RESTAURANT_MENUS = gql`
+  query getRestaurantMenus($id: ID!) {
+    menus(restaurantId: $id) {
+      id,
+      name
     }
   }
 `;

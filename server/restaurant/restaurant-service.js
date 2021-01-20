@@ -25,9 +25,9 @@ const restaurantService = () => {
       throw err;
     }
   };
-  const getSingle = async name => {
+  const getSingle = async id => {
     try {
-      return await Restaurant.findOne({ where: { name } });
+      return await Restaurant.findOne({ where: { id } });
     } catch (err) {
       throw err;
     }

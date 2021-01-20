@@ -6,13 +6,20 @@ const {
   editMeal
 } = require("../../meals/meals-service")();
 const { getMealExtra } = require("../../mealExtra/mealExtra-service")();
+const uploader = require("../../configs/cloudinary-config");
+const { uploadPhoto } = require("../../utils");
 
 const mealResolver = {
   Mutation: {
-    addMeal: combineResolvers(async (parent, args) => {
+    addMeal: combineResolvers(isAuthenticated, async (parent, args) => {
       try {
+         // gets the meal photo url
+         console.log(args);
+        
+         const photo = await uploadPhoto(args.photo, uploader);
+         const meal = { ...args, photo };
         // add the meal to db
-        return await addMeal(args);
+        return await addMeal(meal);
       } catch (err) {
         throw err;
       }

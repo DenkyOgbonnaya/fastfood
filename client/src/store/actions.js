@@ -11,7 +11,9 @@ import {
   DELETE_MENU,
   ADD_DRIVER,
   EDIT_PROFILE,
-  GET_USER_RESTAURANTS
+  GET_USER_RESTAURANTS,
+  GET_RESTAURANT_MENUS,
+  ADD_MEAL
 } from "../graphql/constants";
 
 export default {
@@ -75,12 +77,12 @@ export default {
       console.log(err);
     }
   },
-  handleGetRestaurant: async ({ commit }, name) => {
+  handleGetRestaurant: async ({ commit }, id) => {
     try {
       const { data } = await apollo.query({
         query: GET_RESTAURANT,
         variables: {
-          name
+          id
         }
       });
       commit("addRestaurant", data.restaurant);
@@ -194,7 +196,32 @@ export default {
       const { data } = await apollo.query({
         query: GET_USER_RESTAURANTS
       });
-      commit("addRestaurant", data.userRestaurants);
+      commit("addRestaurants", data.userRestaurants);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  handleAddMeal: async ({ commit }, credentials) => {
+    try {
+      const { data } = await apollo.mutate({
+        mutation: ADD_MEAL,
+        variables: credentials
+      })
+      return data.addMeal;
+    } catch (err) {
+      throw err;
+    }
+  },
+  handleGetRestaurantMenus: async ({ commit }, restaurantId) => {
+    console.log(restaurantId, "IDDD")
+    try {
+      const { data } = await apollo.query({
+        query: GET_RESTAURANT_MENUS,
+        variables: {
+          id: restaurantId
+        }
+      });
+      commit("addMenus", data.menus);
     } catch (err) {
       console.log(err);
     }
