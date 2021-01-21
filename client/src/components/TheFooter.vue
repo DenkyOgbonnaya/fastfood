@@ -42,13 +42,13 @@
           </li>
           <li>
             <a href="/#"> <img src="~@/assets/images/meal-2.svg" alt=""/></a>
-            <a href="/#"> <img src="~@/assets/images/meal-2.svg" alt=""/></a>
+            <a class="bg" href="/#"> <img src="~@/assets/images/meal-2.svg" alt=""/></a>
           </li>
         </ul>
       </div>
     </section>
     <section>
-      (c) Copyright 2019. All Rigths Reserved
+      (c) Copyright 2021. Dennis Ogbonnaya(Denky)
     </section>
   </footer>
 </template>
@@ -115,6 +115,9 @@ ul {
       &:hover {
         background: $warning-color;
       }
+    }
+    img.bg {
+      background: $warning-color;
     }
   }
 }
