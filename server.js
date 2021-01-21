@@ -16,7 +16,6 @@ const server = new ApolloServer({
   context: async ({ req }) => {
     const token = req.headers["authorization"];
     const currentUser  = await verifyToken(token) || " ";
-    console.log(currentUser, 'lll');
     
     return {
       currentUser

@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build",
     "dev": "nodemon",
     "pretest": "eslint --ignore-path .gitignore ."
   },
