@@ -25,6 +25,7 @@ const mealSchema = gql`
   }
 
   type Extra {
+    id: ID
     name: String!,
     price: Int!
   }

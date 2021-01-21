@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <h4>Add Meal</h4>
+    <div v-if="errorMessage" class="alert alert-danger"> {{errorMessage}} </div>
     <form @submit.prevent="handleSubmit">
       <div class="row">
         <div class="col">
@@ -123,7 +124,8 @@ export default {
       price: "",
       extras: [],
       photo: "",
-      loading: false
+      loading: false,
+      errorMessage: ""
     };
   },
   components: {
@@ -140,6 +142,7 @@ export default {
       "handleAddMeal"]),
     async handleSubmit () {
       this.loading = true;
+      this.errorMessage = ""
       const mealData = {
         category: this.category,
         name: this.name,
@@ -155,6 +158,7 @@ export default {
         await this.handleAddMeal(mealData);
         this.loading = false
       } catch (err) {
+        this.errorMessage = err.message
         this.loading = false
       }
     },
