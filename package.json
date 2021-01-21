@@ -29,5 +29,9 @@
     "eslint-config-strongloop": "^2.1.0",
     "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1"
-  }
+  },
+  "engine": {
+    "yarn": "1.21.1",
+    "node": "12.14.0"
+}
 }

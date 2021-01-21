@@ -152,7 +152,6 @@ export default {
         menu: this.menuId,
         photo: this.photo
       };
-      console.log(mealData);
 
       try {
         await this.handleAddMeal(mealData);
@@ -167,12 +166,9 @@ export default {
       this.extras = updatedExtras;
     },
     removeExras (index) {
-      console.log(index, "extra")
       this.extras = this.extras.filter((meal, mealIndex) => mealIndex !== index)
-      console.log(this.extras.length)
     },
     getRestaurantMenu (e) {
-      console.log("REST", e.target.value)
       this.handleGetRestaurantMenus(e.target.value);
     },
     handleFIleChange ({ target }) {

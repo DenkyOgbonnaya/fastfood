@@ -74,7 +74,6 @@ export default {
       });
       commit("addRestaurants", data.restaurants);
     } catch (err) {
-      console.log(err);
     }
   },
   handleGetRestaurant: async ({ commit }, id) => {
@@ -87,7 +86,6 @@ export default {
       });
       commit("addRestaurant", data.restaurant);
     } catch (err) {
-      console.log(err);
     }
   },
   handleGetMenuMeals: async ({ commit }, menuId) => {
@@ -100,7 +98,6 @@ export default {
       });
       commit("addRestaurant", data.restaurant);
     } catch (err) {
-      console.log(err);
     }
   },
   handleUpdateCarts: ({ commit }, data) => {
@@ -122,7 +119,6 @@ export default {
       });
       commit("addRestaurants", data.search);
     } catch (err) {
-      console.log(err);
     }
   },
   verifyToken: async (context, token) => {
@@ -133,7 +129,6 @@ export default {
       })
       return data.verifyToken;
     } catch (err) {
-      console.log(err);
     }
   },
   handleRestaurantAdd: async ({ commit }, credentials) => {
@@ -198,7 +193,6 @@ export default {
       });
       commit("addRestaurants", data.userRestaurants);
     } catch (err) {
-      console.log(err);
     }
   },
   handleAddMeal: async ({ commit }, credentials) => {
@@ -223,7 +217,6 @@ export default {
       });
       commit("addMenus", data.menus);
     } catch (err) {
-      console.log(err);
     }
   }
 };
