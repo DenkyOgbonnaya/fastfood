@@ -207,7 +207,6 @@ export default {
     }
   },
   handleGetRestaurantMenus: async ({ commit }, restaurantId) => {
-    console.log(restaurantId, "IDDD")
     try {
       const { data } = await apollo.query({
         query: GET_RESTAURANT_MENUS,
