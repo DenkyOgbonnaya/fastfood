@@ -18,6 +18,7 @@ app.use(
     verbose: true,
   })
 );
+app.use(express.static(path.join(__dirname, "client/dist")))
 
 const server = new ApolloServer({
   typeDefs: schemas,
