@@ -8,7 +8,7 @@ const{
   DB_TEST_URL,
   DB_URL
 } = process.env;
-
+//postgres://uhcdgtlbakuggo:c616ad5c14f965c15bafacc897ce4f36e1f6a147804a26d63d54e5c3d225bb27@ec2-46-137-79-235.eu-west-1.compute.amazonaws.com:5432/d4ugoaplgbc0in
 module.exports = {
   development: {
     username: 'postgres',//DB_USER,
