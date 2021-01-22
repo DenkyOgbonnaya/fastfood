@@ -32,7 +32,7 @@ const server = new ApolloServer({
   },
 });
 app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.resolve(__dirname, "/client/dist/index.html"));
 });
 server.applyMiddleware({ app, path: "/graphql" });
 app.listen({ port }, () => {
