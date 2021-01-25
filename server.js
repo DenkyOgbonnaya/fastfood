@@ -4,7 +4,7 @@ const cors = require("cors");
 const { ApolloServer } = require("apollo-server-express");
 const schemas = require("./server/graphql/schemas");
 const resolvers = require("./server/graphql/resolvers");
-var history = require("connect-history-api-fallback");
+//var history = require("connect-history-api-fallback");
 const path = require('path');
 
 const { verifyToken } = require("./server/utils");
@@ -12,12 +12,13 @@ const { verifyToken } = require("./server/utils");
 const app = express();
 const port = process.env.PORT || 8000;
 app.use(cors());
-app.use(
+
+/*app.use(
   history({
     disableDotRule: true,
     verbose: true,
   })
-);
+);*/
 app.use(express.static(path.join(__dirname, "client/dist")))
 
 const server = new ApolloServer({
