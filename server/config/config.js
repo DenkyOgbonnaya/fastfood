@@ -11,11 +11,11 @@ const{
 } = process.env;
 module.exports = {
   development: {
-    /*username: 'postgres',//DB_USER,
-    database: 'fastfood',//DB_NAME,
-    password: 'denky', //DB_PASS
+    username: DB_USER, // 'postgres'
+    database: DB_NAME, //'fastfood'
+    password: DB_PASS, //'FKK'
     port: DB_PORT,
-    host: DB_HOST,*/
+    host: DB_HOST,
     use_env_variable: DATABASE_URL,
     dialect: 'postgres'
   },
@@ -24,6 +24,11 @@ module.exports = {
     dialect: 'postgres'
   },
   production: {
+    username: DB_USER, // 'postgres'
+    database: DB_NAME, //'fastfood'
+    password: DB_PASS, //'FKK'
+    port: DB_PORT,
+    host: DB_HOST,
     use_env_variable: DATABASE_URL,
     dialect: 'postgres'
   }

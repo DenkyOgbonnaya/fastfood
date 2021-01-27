@@ -13,15 +13,20 @@ const db = {};
 let sequelize;
 
 if (env === "development") {
-  /*sequelize = new Sequelize(
+  sequelize = new Sequelize(
     config.database,
     config.username,
     config.password,
     config
-  );*/
-  sequelize = new Sequelize(process.env.DATABASE_URL);
-} else if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL);
+  );
+  //sequelize = new Sequelize(process.env.DATABASE_URL);
+} else if (env === "production") {
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  );
 } else if (process.env.DATABASE_TEST_URL) {
   sequelize = new Sequelize(process.env.DATABASE_TEST_URL);
 }
