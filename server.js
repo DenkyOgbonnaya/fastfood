@@ -33,10 +33,12 @@ const server = new ApolloServer({
     };
   },
 });
+server.applyMiddleware({ app, path: "/graphql" });
+
 app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client/dist/index.html"));
 });
-server.applyMiddleware({ app, path: "/graphql" });
+
 app.listen({ port }, () => {
   console.log(`Server on http://localhost:${port}/graphql`);
 });
