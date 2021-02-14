@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "apollo-server": "^2.9.16",
-    "apollo-server-express": "^2.9.16",
+    "apollo-server-express": "^2.14.2",
     "bcrypt": "^3.0.7",
     "cloudinary": "^1.19.0",
     "connect-history-api-fallback": "^1.6.0",
